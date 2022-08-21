@@ -1,0 +1,19 @@
+.bi {
+  display: none;
+}
+
+.card:hover{
+  transform: scale(1.01);
+}
+
+.card{
+  transition: transform .5s;
+}
+
+.card:hover .bi {
+  display: block;
+}
+
+.btn:hover {
+  background-color: RoyalBlue;
+}

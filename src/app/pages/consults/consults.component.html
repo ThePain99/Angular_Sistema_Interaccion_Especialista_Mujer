@@ -1,0 +1,105 @@
+<section *ngIf="consultExist == false" class="vh-100" style="background-color: #EDE9E9">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-8 col-md-6 col-lg-5 col-xl-4 text-center">
+        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 192.45px;"/>
+        <div style="height: 40px"></div>
+        <div>
+          <span class="fw-semibold" style="font-size: 15px">Aún no cuentas con usuarios</span>
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle ms-2" style="width: 30px;"/>
+        </div>
+        <div class="mt-2">
+          <span class="fw-normal" style="font-size: 15px">Crea </span>
+          <span class="fw-semibold" style="font-size: 15px">usuarios </span>
+          <span class="fw-normal" style="font-size: 15px">para tus </span>
+          <span class="fw-semibold" style="font-size: 15px">consultas </span>
+          <span class="fw-normal" style="font-size: 15px">y carga su información para darles seguimiento.</span>
+        </div>
+
+        <button class="mt-2 btn btn-primary text-white" style="background-color: #0B3C5D; font-size: 14px" type="submit">
+          + Crear Usuario</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="consultExist == true" class="vh-100" style="background-color: #EDE9E9">
+  <div style="height: 16px;"></div>
+  <div class="d-flex">
+    <span class="fw-semibold" style="font-size: 14px; margin-left: 41px">Consultas </span>
+    <span class="fw-light" style="font-size: 14px">(3)</span>
+    <div class="input-group ms-auto me-3" style="width: 329px;">
+      <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+      <button class="btn" type="button" id="button-addon2" style="background-color: #0B3C5D; color: white;"><i class="bi-search"></i></button>
+    </div>
+    <button class="btn text-white" style="background-color: #0B3C5D; margin-right: 43px">+</button>
+  </div>
+
+  <div style="height: 44px;"></div>
+
+  <span class="fw-semibold" style="font-size: 20px; margin-left: 41px;">24/03/2022</span>
+
+  <div style="margin-right: 41px; margin-left: 43px; margin-top: 11px">
+    <div class="justify-content-center align-items-center h-100">
+      <div class="card" style="margin-bottom: 13px">
+        <div class="d-flex">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 303.84px; height: 192px;"/>
+          <div class="card-body">
+            <div>
+              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #1D2731">Virtual</span>
+              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #328CC1">Física</span>
+              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #328CC1">Sexual</span>
+              <span class="fw-semibold float-end" style="font-size: 20px">15:30</span>
+            </div>
+            <div class="d-flex">
+              <h5 class="fw-normal card-title mt-1 me-2">:Nombres y Apellidos del paciente:</h5>
+              <i class="bi bi-pencil-fill mt-1"></i>
+              <i class="bi bi-trash-fill mt-1"></i>
+            </div>
+            <div class=" col-md-6 col-xl-5">
+              <p class="card-text" style="font-size: 13px">Earth is the third planet from the Sun and the only astronomical object known to harbor life.
+                According to radiometric dating estimation and other evidence, Earth formed over 4.5 billion years ago. </p>
+            </div>
+            <div class="text-end align-text-bottom mt-2">
+              <a href="#" class="btn text-white" style="background-color: #0B3C5D; width: 164px">Finalizar</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="card" style="margin-bottom: 13px">
+        <div class="d-flex">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 303.84px; height: 192px;"/>
+          <div class="card-body">
+            <div>
+              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #1D2731">Virtual</span>
+              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #328CC1">Física</span>
+              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #328CC1">Sexual</span>
+              <span class="fw-semibold float-end" style="font-size: 20px">20:00</span>
+            </div>
+            <div class="d-flex">
+              <h5 class="fw-normal card-title mt-1 me-2">:Nombres y Apellidos del paciente:</h5>
+              <i class="bi bi-pencil-fill mt-1"></i>
+              <i class="bi bi-trash-fill mt-1"></i>
+            </div>
+            <div class=" col-md-6 col-xl-5">
+              <p class="card-text" style="font-size: 13px">Earth is the third planet from the Sun and the only astronomical object known to harbor life.
+                According to radiometric dating estimation and other evidence, Earth formed over 4.5 billion years ago. </p>
+            </div>
+            <div class="text-end align-text-bottom mt-2">
+              <a href="#" class="btn text-white" style="background-color: rgba(255, 0, 0, 0.61); width: 164px">Cancelar</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
