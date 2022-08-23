@@ -1,0 +1,81 @@
+<div class="container-fluid" style="background-color: white">
+  <div class="row py-4">
+    <div class="d-flex">
+      <span class="px-4" style="color: black"><b>Usuarios app</b> (2)</span>
+      <input class="form-control ms-auto" id="input" type="search" placeholder="Buscar...">
+      <button class="btn" id="btn-search" type="submit"><i class="bi-search"></i></button>
+      <button class="btn btn-primary" id="btn-plus" style="background-color: #0B3C5D">+</button>
+    </div>
+  </div>
+  <div class="table-responsive px-4">
+    <table class="table" style="background-color: white">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Correo electrónico</th>
+          <th scope="col">DNI</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Modalidad</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Consultas</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jane Cooper</td>
+          <td>Arlene McCoy</td>
+          <td>sara.cruz@example.com</td>
+          <td>12548963</td>
+          <td>Administrador</td>
+          <td>-</td>
+          <td style="color: #55C8AE">Activo</td>
+          <td>-</td>
+          <td>
+            <button class="btn" data-toggle="modal" data-target="#exampleModal">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Leslie Alexander</td>
+          <td>Kathryn Murphy</td>
+          <td>sara.cruz@example.com</td>
+          <td>69877410</td>
+          <td>Administrador</td>
+          <td>-</td>
+          <td style="color: #FF0000">Inactivo</td>
+          <td>-</td>
+          <td>
+            <button class="btn" data-toggle="modal" data-target="#exampleModal">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <p class="modal-title text-center" style="text-size-adjust: 100px" id="exampleModalLabel">
+              <i class="bi bi-exclamation-circle" style="font-size: 70px; color: #FF9A62"></i>
+            </p>
+            <b class="text-center">¿Estás seguro de que deseas eliminar al usuario?</b>
+            <p class="text-center">La acción no será reversible, y se perderá su historial en el sistema.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" style="background-color: white; color: black" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

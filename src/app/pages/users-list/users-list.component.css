@@ -1,0 +1,27 @@
+#search {
+    margin-right: 0px;
+    padding-right: 0px;
+    padding-left: 5px;
+    width: 100%;
+}
+#btn-search {
+    background-color: #E7F3F9;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: #00689D;
+    border-color: black;
+    border: 2px solid;
+    padding-top: 3px;
+    padding-left: 7px;
+    margin-right: 5px;
+}
+#btn-plus {
+    margin-right: 20px;
+}
+#input {
+    width: 250px;
+}
+.table-responsive {
+    margin-top: 20px;
+}
