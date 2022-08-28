@@ -32,7 +32,7 @@
       <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
       <button class="btn" type="button" id="button-addon2" style="background-color: #0B3C5D; color: white;"><i class="bi-search"></i></button>
     </div>
-    <button class="btn text-white" style="background-color: #0B3C5D; margin-right: 43px">+</button>
+    <a class="btn text-white" href="/create-consult" style="background-color: #0B3C5D; margin-right: 43px">+</a>
   </div>
 
   <div style="height: 44px;"></div>
@@ -54,7 +54,7 @@
             <div class="d-flex">
               <h5 class="fw-normal card-title mt-1 me-2">:Nombres y Apellidos del paciente:</h5>
               <i class="bi bi-pencil-fill mt-1"></i>
-              <i class="bi bi-trash-fill mt-1"></i>
+              <i data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
             </div>
             <div class=" col-md-6 col-xl-5">
               <p class="card-text" style="font-size: 13px">Earth is the third planet from the Sun and the only astronomical object known to harbor life.
@@ -82,7 +82,7 @@
             <div class="d-flex">
               <h5 class="fw-normal card-title mt-1 me-2">:Nombres y Apellidos del paciente:</h5>
               <i class="bi bi-pencil-fill mt-1"></i>
-              <i class="bi bi-trash-fill mt-1"></i>
+              <i data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
             </div>
             <div class=" col-md-6 col-xl-5">
               <p class="card-text" style="font-size: 13px">Earth is the third planet from the Sun and the only astronomical object known to harbor life.
@@ -96,6 +96,26 @@
 
       </div>
 
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <p class="modal-title text-center" style="text-size-adjust: 50px" id="exampleModalLabel">
+              <i class="bi-exclamation-circle" style="font-size: 70px; color: #FF9A62"></i>
+            </p>
+            <b class="text-center">¿Estás seguro de que deseas eliminar al usuario?</b>
+            <p class="text-center">La acción no será reversible, y se perderá su historial en el sistema.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" style="background-color: white; color: black" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>

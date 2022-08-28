@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToHome() {
-    this.route.navigate(['home'])
+    this.route.navigate(['consults'])
     this.app.userLoggedIn = true;
   }
 }

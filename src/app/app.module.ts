@@ -7,6 +7,8 @@ import {RecoverComponent} from "./pages/recover/recover.component";
 import {AppRoutingModule} from "./app-routing.module";
 import { ConsultsComponent } from './pages/consults/consults.component';
 import {NavbarComponent} from "./components/navbar/navbar.component";
+import { CreateConsultComponent } from './pages/create-consult/create-consult.component';
+import { ListConsultComponent } from './pages/list-consult/list-consult.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {NavbarComponent} from "./components/navbar/navbar.component";
     NavbarComponent,
     ConsultsComponent,
     NavbarComponent,
+    CreateConsultComponent,
+    ListConsultComponent,
   ],
   imports: [
     BrowserModule,
