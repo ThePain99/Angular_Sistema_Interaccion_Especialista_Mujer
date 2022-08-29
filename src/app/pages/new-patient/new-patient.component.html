@@ -1,54 +1,39 @@
 <div class="container-fluid" style="background-color: white">
     <div class="row py-4">
         <p class="px-5 my-0" style="color: #2694FC">
-            <b>< Listado de usuarios</b>
+            <b role="button" (click)="navigateToPatientsList()">< Listado de pacientes</b>
         </p>
         <p class="px-5 my-0" style="color: #4F4F4F">
-            <b>Crear usuario</b>
+            <b>Crear paciente</b>
         </p>
     </div>
 </div>
-<div class="container-fluid overflow-auto" id="background" style="background-color: #EDE9E957">
-    <div class="container-fill px-5" id="box" style="background-color: white">
-        <p style="color: #4F4F4F" id="subtitle-1"><b>INFORMACIÓN PERSONAL</b></p>
-        <p style="color: #4F4F4F" id="text">Nombres y Apellidos<b style="color: #FF0000">*</b></p>
+<div class="container-fluid overflow-auto  justify-content: center" id="background" style="background-color: #EDE9E957">
+    <div class="container px-5" id="box" style="background-color: white">
+        <p style="color: #4F4F4F" id="subtitle-1"><b>INFORMACIÓN</b></p>
+        <p style="color: #4F4F4F" id="text">Nombre y Apellido<b style="color: #FF0000">*</b></p>
         <div class="row">
-            <div class="col-3">
+            <div class="col-lg-3 col-md-4">
                 <input type="text" class="form-control" placeholder="Nombres" required>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 col-md-4">
                 <input type="text" class="form-control" placeholder="Apellidos" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-lg-3 col-md-4">
                 <p style="color: #4F4F4F" id="text">DNI<b style="color: #FF0000">*</b></p>
                 <input type="text" class="form-control" placeholder="DNI" required>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 col-md-4">
                 <p style="color: #4F4F4F" id="text">Correo electrónico<b style="color: #FF0000">*</b></p>
                 <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" required>
             </div>
         </div>
-        
-        <p style="color: #4F4F4F" id="subtitle-2"><b>INFORMACIÓN LABORAL</b></p>
         <div class="row">
-            <div class="col-3">
-                <p style="color: #4F4F4F" id="text">Tipo de usuario<b style="color: #FF0000">*</b></p>
-                <select class="form-select">
-                    <option selected>Especialista</option>
-                    <option value="1">..</option>
-                    <option value="2">..</option>
-              </select>
-            </div>
-            <div class="col-3">
-                <p style="color: #4F4F4F" id="text">Modalidad de atención<b style="color: #FF0000">*</b></p>
-                <select class="form-select">
-                    <option selected>Seleccionar modalidad</option>
-                    <option value="1">Presencial</option>
-                    <option value="2">Virtual</option>
-                    <option value="3">Mixto</option>
-              </select>
+            <div class="col-lg-3 col-md-4">
+                <p style="color: #4F4F4F" id="text">Número telefónico<b style="color: #FF0000">*</b></p>
+                <input type="text" class="form-control" placeholder="Número telefónico" required>
             </div>
         </div>
         

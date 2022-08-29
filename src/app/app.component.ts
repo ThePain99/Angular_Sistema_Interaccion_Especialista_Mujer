@@ -12,4 +12,5 @@ export class AppComponent {
   title = 'TDPANGULAR';
   userLoggedIn = true;
   navbarAdmin = false;
+  empty = true;
 }

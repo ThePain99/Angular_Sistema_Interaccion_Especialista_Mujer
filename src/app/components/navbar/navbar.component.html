@@ -14,10 +14,10 @@
         <li *ngIf="this.app.navbarAdmin == false" class="nav-item">
           <a class="btn nav-link text-white">Historial</a>
         </li>
-        <li *ngIf="this.app.navbarAdmin == false" class="nav-item">
+        <li *ngIf="this.app.navbarAdmin == false" class="nav-item" (click)="navigateToPatientsList()">
           <a class="btn nav-link text-white">Pacientes</a>
         </li>
-        <li *ngIf="this.app.navbarAdmin == true" class="nav-item">
+        <li *ngIf="this.app.navbarAdmin == true" class="nav-item" (click)="navigateToUsersList()">
           <a class="btn nav-link text-white">Usuarios</a>
         </li>
 
