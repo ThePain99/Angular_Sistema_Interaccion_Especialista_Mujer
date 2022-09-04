@@ -27,7 +27,7 @@ const index: Routes = [
   //PSICOLOGO
   { path: 'patients-list', component: PatientsListComponent},
   { path: 'new-patient', component: NewPatientComponent},
-  { path: 'edit-patient', component: EditPatientComponent}
+  { path: 'edit-patient', component: EditPatientComponent},
   { path: 'consults', component: ConsultsComponent },
   { path: 'create-consult', component: CreateConsultComponent},
   { path: 'history-consult', component: ListConsultComponent}

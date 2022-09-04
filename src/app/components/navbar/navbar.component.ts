@@ -20,4 +20,8 @@ export class NavbarComponent implements OnInit {
   navigateToUsersList(): void {
     this.router.navigate([`/users-list`]).then(() => null);
   }
+
+  navigateToAccount(): void {
+    this.router.navigate([`/account`]).then(() => null);
+  }
 }
