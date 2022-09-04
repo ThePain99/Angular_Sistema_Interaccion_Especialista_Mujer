@@ -1,0 +1,60 @@
+<div class="container-fluid" style="background-color: #EDE9E957">
+    <div class="row py-4">
+        <p class="px-5 my-0" style="color: #2694FC">
+            <b role="button" (click)="navigateToUsersList()">< Listado de usuarios</b>
+        </p>
+    </div>
+</div>
+<div class="container-fluid overflow-auto" id="background" style="background-color: #EDE9E957">
+    <div class="container-fill px-5" id="box" style="background-color: white">
+        <p style="color: #4F4F4F" id="subtitle-1"><b>INFORMACIÓN PERSONAL</b></p>
+        <p style="color: #4F4F4F" id="text">Nombres y Apellidos</p>
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Nombres" value="Jane Cooper" required>
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Apellidos" value="Wade Warren" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <p style="color: #4F4F4F" id="text">DNI</p>
+                <input type="text" class="form-control" placeholder="DNI" value="74528245" required>
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <p style="color: #4F4F4F" id="text">Correo electrónico</p>
+                <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" value="ejemplo@yopmail.com" required>
+            </div>
+        </div>
+        
+        <p style="color: #4F4F4F" id="subtitle-2"><b>ACTUALIZAR CONTRASEÑA</b></p>
+        <p style="color: #4F4F4F" id="text">Contraseña actual</p>
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <input type="password" class="form-control" placeholder="Contraseña actual" value="**********" required>
+            </div>   
+        </div>
+        <p style="color: #4F4F4F" id="text">Nueva contraseña</p>
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <input type="password" class="form-control" placeholder="Nueva contraseña" required>
+            </div> 
+        </div>
+        <p style="color: #4F4F4F" id="text">Confirmar nueva contraseña</p>
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <input type="password" class="form-control" placeholder="Confirmar nueva contraseña" required>
+            </div>
+        </div> 
+        
+        <div class="row justify-content-end py-4">
+            <div class="col-auto">
+                <button class="btn btn-secondary" style="background-color:white; color:black" type="submit">Cancelar</button>
+            </div>
+            <div class="col-auto" style="color:white">
+                <button class="btn btn-secondary" style="background-color:#D9D9D9; color:#979797" type="submit">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

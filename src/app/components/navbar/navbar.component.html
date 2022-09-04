@@ -8,14 +8,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <li class="nav-item">
-          <a href="/consults" class="btn nav-link text-white">Consultas</a>
+        <li *ngIf="this.app.navbarAdmin == false" class="nav-item">
+          <a class="btn nav-link text-white">Consultas</a>
         </li>
-        <li class="nav-item">
-          <a href="/history-consult" class="btn nav-link text-white">Historial</a>
+        <li *ngIf="this.app.navbarAdmin == false" class="nav-item">
+          <a class="btn nav-link text-white">Historial</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="this.app.navbarAdmin == false" class="nav-item" (click)="navigateToPatientsList()">
           <a class="btn nav-link text-white">Pacientes</a>
+        </li>
+        <li *ngIf="this.app.navbarAdmin == true" class="nav-item" (click)="navigateToUsersList()">
+          <a class="btn nav-link text-white">Usuarios</a>
         </li>
 
       </ul>

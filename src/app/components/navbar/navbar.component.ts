@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public app: AppComponent, private router: Router) {}
   ngOnInit(): void {
   }
 
+  navigateToPatientsList(): void {
+    this.router.navigate([`/patients-list`]).then(() => null);
+  }
+
+  navigateToUsersList(): void {
+    this.router.navigate([`/users-list`]).then(() => null);
+  }
 }
