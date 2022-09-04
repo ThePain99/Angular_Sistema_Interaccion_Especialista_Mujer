@@ -9,6 +9,8 @@ import { EditUserComponent } from "../pages/edit-user/edit-user.component";
 import { PatientsListComponent } from "../pages/patients-list/patients-list.component";
 import { NewPatientComponent } from "../pages/new-patient/new-patient.component";
 import { EditPatientComponent } from "../pages/edit-patient/edit-patient.component";
+import {CreateConsultComponent} from "../pages/create-consult/create-consult.component";
+import {ListConsultComponent} from "../pages/list-consult/list-consult.component";
 
 
 const index: Routes = [
@@ -26,6 +28,9 @@ const index: Routes = [
   { path: 'patients-list', component: PatientsListComponent},
   { path: 'new-patient', component: NewPatientComponent},
   { path: 'edit-patient', component: EditPatientComponent}
+  { path: 'consults', component: ConsultsComponent },
+  { path: 'create-consult', component: CreateConsultComponent},
+  { path: 'history-consult', component: ListConsultComponent}
 ];
 
 export default index;

@@ -14,6 +14,8 @@ import { EditPatientComponent } from './pages/edit-patient/edit-patient.componen
 import { NewPatientComponent } from './pages/new-patient/new-patient.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
+import { CreateConsultComponent } from './pages/create-consult/create-consult.component';
+import { ListConsultComponent } from './pages/list-consult/list-consult.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { NewUserComponent } from './pages/new-user/new-user.component';
     NewPatientComponent,
     EditUserComponent,
     NewUserComponent,
+    CreateConsultComponent,
+    ListConsultComponent,
   ],
   imports: [
     BrowserModule,
