@@ -1,0 +1,7 @@
+.bi {
+  display: none;
+}
+
+.table tr:hover .bi {
+  display: inline;
+}

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./consults.component.css']
 })
 export class ConsultsComponent implements OnInit {
-  consultExist = true;
+  consultExist = false;
 
   constructor() { }
 
