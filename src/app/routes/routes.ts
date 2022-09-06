@@ -20,14 +20,14 @@ const index: Routes = [
   { path: 'home', component: ConsultsComponent },
   // ADMIN
   { path: 'account', component: AccountComponent},
-  { path: 'users-list', component: UsersListComponent},
-  { path: 'new-user', component: NewUserComponent},
-  { path: 'edit-user', component: EditUserComponent},
+  { path: 'user/:id/users-list', component: UsersListComponent},
+  { path: 'user/:id/users-list/new-user', component: NewUserComponent},
+  { path: 'user/:id/users-list/:userId/edit-user', component: EditUserComponent},
 
-  //PSICOLOGO
-  { path: 'patients-list', component: PatientsListComponent},
-  { path: 'new-patient', component: NewPatientComponent},
-  { path: 'edit-patient', component: EditPatientComponent},
+  // ESPECIALISTA
+  { path: 'user/:id/patients-list', component: PatientsListComponent},
+  { path: 'user/:id/patients-list/new-patient', component: NewPatientComponent},
+  { path: 'user/:id/patients-list/:patientId/edit-patient', component: EditPatientComponent},
   { path: 'consults', component: ConsultsComponent },
   { path: 'create-consult', component: CreateConsultComponent},
   { path: 'history-consult', component: ListConsultComponent}

@@ -1,11 +1,11 @@
-<section *ngIf="this.app.empty == true">
+<section *ngIf="this.allUsers.length == 0">
   <div class="container">
     <div class="row" id="center">
       <div class="text-center">
         <img id="img1" src="assets/images/empty_state.png">
       </div>
       <p class="text-center" style="color: black">
-          <b>Aún no cuentas con usuarios </b>
+          <b>Aún no cuentas con usuarios</b>
           <img id="img2" src="assets/images/user_icon.png">
       </p>
       <p class="text-center my-2" style="color: black">
@@ -20,16 +20,16 @@
     </div>
   </div>
 </section>
-<section *ngIf="this.app.empty == false">
+<section *ngIf="this.allUsers.length > 0">
   <div class="container-fluid" id="header" style="background-color: white">
     <div id="row" class="row py-4">
       <div class="col-xl-8 col-md-8 col-sm-6 col-6">
-        <span style="color: black"><b>Usuarios app</b> (2)</span>
+        <span style="color: black"><b>Usuarios app </b>{{allUsers.length}}</span>
       </div>
       <div class="col-xl-3 col-md-3 col-sm-5 col-5">
         <div class="input-group">
-          <input class="form-control" type="search" placeholder="Buscar...">
-          <button class="btn" style="background-color: #00689D" type="submit"><i class="bi-search"></i></button>
+          <input [(ngModel)]="searchText" class="form-control" type="search" placeholder="Buscar...">
+          <button class="btn" style="background-color: #0B3C5D; color: white;" type="submit"><i class="bi-search"></i></button>
         </div>
       </div>
       <div class="col-xl-1 col-sm-1 col-md-1 col-1">
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="table-responsive px-4">
-      <table class="table" style="background-color: white">
+      <table id="table" class="table" style="background-color: white">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -54,40 +54,33 @@
           </tr>
         </thead>
         <tbody>
-          <tr id="table-row">
-            <td>Jane Cooper 
-              <span role="button" (click)="navigateToEditUser()">
+          <tr id="table-row" *ngFor="let item of allUsers | slice: (page-1) * pageSize : page * pageSize | userNameFilter:searchText">
+            <td>{{item.nombre}}
+              <span role="button" (click)="navigateToEditUser(item.id)">
                 <i id="icon" class="bi bi-pencil-fill"></i>
               </span>
-              <span class="mx-1" role="button" data-toggle="modal" data-target="#deleteUser">
+              <span class="mx-1" role="button" data-toggle="modal" data-target="#deleteUser" (click)="deleteUser(item.id)">
                 <i id="icon" class="bi bi-trash-fill"></i>
               </span>
             </td>
-            <td>Arlene McCoy</td>
-            <td>sara.cruz@example.com</td>
-            <td>12548963</td>
-            <td>Administrador</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-          <tr id="table-row">
-            <td>Leslie Alexander 
-              <span role="button" (click)="navigateToEditUser()">
-                <i id="icon" class="bi bi-pencil-fill"></i>
-              </span>
-              <span class="mx-1" role="button" data-toggle="modal" data-target="#deleteUser">
-                <i id="icon" class="bi bi-trash-fill"></i>
-              </span>
-            </td>
-            <td>Kathryn Murphy</td>
-            <td>sara.cruz@example.com</td>
-            <td>69877410</td>
-            <td>Administrador</td>
-            <td>-</td>
-            <td>-</td>
+            <td>{{item.apellido}}</td>
+            <td>{{item.correo}}</td>
+            <td>{{item.dni}}</td>
+            <td *ngIf="item.tipo == true">Especialista</td>
+            <td *ngIf="item.tipo == false">Administrador</td>
+            <td *ngIf="item.modalidadId == 1">Presencial</td>
+            <td *ngIf="item.modalidadId == 2">Virtual</td>
+            <td *ngIf="item.modalidadId == 3">Mixto</td>
+            <td *ngIf="item.modalidadId != 1 && item.modalidadId != 2 && item.modalidadId != 3">-</td>
+            <td>{{item.consultaCount}}</td>
           </tr>
         </tbody>
       </table>
+      <ngb-pagination id="pagination"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="allUsers.length">
+      </ngb-pagination>
     </div>
     <div class="modal fade" id="deleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -102,8 +95,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" style="background-color: white; color: black" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
+            <button type="button" class="btn btn-secondary" style="background-color: white; color: black" (click)="close()" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" style="background-color: #EA6369" (click)="deleteUserById()">Eliminar</button>
           </div>
         </div>
       </div>

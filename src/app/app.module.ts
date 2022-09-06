@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-import {LoginComponent} from "./pages/login/login.component";
-import {RecoverComponent} from "./pages/recover/recover.component";
-import {AppRoutingModule} from "./app-routing.module";
+import { LoginComponent } from "./pages/login/login.component";
+import { RecoverComponent } from "./pages/recover/recover.component";
+import { AppRoutingModule } from "./app-routing.module";
 import { ConsultsComponent } from './pages/consults/consults.component';
-import {NavbarComponent} from "./components/navbar/navbar.component";
+import { NavbarComponent } from "./components/navbar/navbar.component";
 import { UsersListComponent } from './pages/users-list/users-list.component';
 import { AccountComponent } from './pages/account/account.component';
 import { PatientsListComponent } from './pages/patients-list/patients-list.component';
@@ -16,6 +15,11 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
 import { CreateConsultComponent } from './pages/create-consult/create-consult.component';
 import { ListConsultComponent } from './pages/list-consult/list-consult.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserSearchPipe } from './components/user-search.pipe';
+import { PatientSearchPipe } from './components/patient-search.pipe';
 
 @NgModule({
   declarations: [
@@ -34,12 +38,22 @@ import { ListConsultComponent } from './pages/list-consult/list-consult.componen
     NewUserComponent,
     CreateConsultComponent,
     ListConsultComponent,
+    UserSearchPipe,
+    PatientSearchPipe
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule { }

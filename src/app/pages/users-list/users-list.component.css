@@ -27,3 +27,7 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+ngb-pagination ::ng-deep .page-item.active .page-link {
+    border-color: white;
+    background-color: #0B3C5D;
+}

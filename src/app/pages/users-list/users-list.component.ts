@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-users-list',
@@ -9,20 +10,57 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class UsersListComponent implements OnInit {
 
-  constructor(public app: AppComponent, private router: Router) {
+  id!: number
+  allUsers!: any
+  public page = 1
+  public pageSize = 10
+  deleteId!: number
+  search!: any
+  searchText!: string
+  
+  constructor(public app: AppComponent,
+              private router: Router,
+              private userService: UserService,
+              private route: ActivatedRoute) {
     this.app.navbarAdmin = true;
-    this.app.empty = false;
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
+    this.getAllUsers()
   }
 
-  navigateToEditUser(): void {
-    this.router.navigate([`/edit-user`]).then(() => null);
+  getAllUsers(): void {
+    this.userService.getAllUsers()
+    .subscribe((response: any) => {
+      if (!response) {
+        return
+      }
+      this.allUsers = response['data']
+    })
+  }
+
+  deleteUserById(): void {
+    this.userService.deleteUserById(this.deleteId)
+    .subscribe(() => {
+      window.location.reload()
+    })
+  }
+
+  deleteUser(userId: number): void {
+    this.deleteId = userId
+  }
+
+  close(): void {
+    this.deleteId = -1
+  }
+
+  navigateToEditUser(userId: number): void {
+    this.router.navigate([`/user/${this.id}/users-list/${userId}/edit-user`]).then(() => null);
   }
 
   navigateToNewUser(): void {
-    this.router.navigate([`/new-user`]).then(() => null);
+    this.router.navigate([`/user/${this.id}/users-list/new-user`]).then(() => null);
   }
 
 }
