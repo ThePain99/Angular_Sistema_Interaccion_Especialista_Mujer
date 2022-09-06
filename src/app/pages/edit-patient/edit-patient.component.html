@@ -14,26 +14,26 @@
         <p style="color: #4F4F4F" id="text">Nombre y Apellido<b style="color: #FF0000">*</b></p>
         <div class="row">
             <div class="col-lg-3 col-md-4">
-                <input type="text" class="form-control" placeholder="Nombres" value="Jane Cooper" required>
+                <input type="text" class="form-control" placeholder="Nombres" value="{{this.patient.nombre}}" (change)="changeName($event)" #name  required>
             </div>
             <div class="col-lg-3 col-md-4">
-                <input type="text" class="form-control" placeholder="Apellidos" value="Esther Howard" required>
+                <input type="text" class="form-control" placeholder="Apellidos" value="{{this.patient.apellido}}" (change)="changeLastName($event)" #lastName required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <p style="color: #4F4F4F" id="text">DNI<b style="color: #FF0000">*</b></p>
-                <input type="text" class="form-control" placeholder="DNI" value="74859623" required>
+                <input type="text" class="form-control" placeholder="DNI" value="{{this.patient.dni}}" (change)="changeDni($event)" #dni required>
             </div>
             <div class="col-lg-3 col-md-4">
                 <p style="color: #4F4F4F" id="text">Correo electrónico<b style="color: #FF0000">*</b></p>
-                <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" value="ejemplo@yopmail.com" required>
+                <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" value="{{this.patient.correo}}" (change)="changeEmail($event)" #email required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <p style="color: #4F4F4F" id="text">Número telefónico<b style="color: #FF0000">*</b></p>
-                <input type="text" class="form-control" placeholder="Número telefónico" value="985544569" required>
+                <input type="text" class="form-control" placeholder="Número telefónico" value="{{this.patient.numero}}" (change)="changeCellphone($event)" #cellphone required>
             </div>
         </div>
         
@@ -42,7 +42,13 @@
                 <button class="btn btn-secondary" style="background-color:white; color:black" type="submit">Cancelar</button>
             </div>
             <div class="col-auto" style="color:white">
-                <button class="btn btn-secondary" style="background-color:#D9D9D9; color:#979797" type="submit">Guardar</button>
+                <button *ngIf="this.name.value.length==0 || this.lastName.value.length==0 || this.dni.value.length==0 
+                        || this.email.value.length==0 || this.cellphone.value.length==0" class="btn btn-secondary"
+                        style="background-color:#D9D9D9; color:#979797" type="submit">Guardar</button>
+
+                <button *ngIf="this.name.value.length!=0 && this.lastName.value.length!=0 && this.dni.value.length!=0 
+                        && this.email.value.length!=0 && this.cellphone.value.length!=0" class="btn btn-secondary"
+                        style="background-color:#0B3C5D; color:white" type="submit" (click)="save()">Guardar</button>
             </div>
         </div>
     </div>

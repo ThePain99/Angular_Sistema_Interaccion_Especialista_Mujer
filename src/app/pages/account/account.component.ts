@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-account',
@@ -8,11 +10,28 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private app: AppComponent) {
-    this.app.navbarAdmin = true;
+  id!: number
+  userId!: any
+  user!: any
+  name!: string
+  lastName!: string
+  dni!: string
+  email!: string
+  password!: string
+
+  constructor(public app: AppComponent,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.getUserById(this.id)
+  }
+
+  getUserById(userId: number): void {
+    this.userService.getUserById(this.userId)
+    .subscribe((response: any) => {
+      this.user = response['data']
+    })
   }
 
 }
