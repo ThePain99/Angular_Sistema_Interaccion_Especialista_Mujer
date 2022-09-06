@@ -11,7 +11,7 @@
         <li *ngIf="this.app.navbarAdmin == false" class="nav-item">
           <a class="btn nav-link text-white">Consultas</a>
         </li>
-        <li *ngIf="this.app.navbarAdmin == false" class="nav-item">
+        <li *ngIf="this.app.navbarAdmin == false" class="nav-item" (click)="navigateToConsultsList()">
           <a class="btn nav-link text-white">Historial</a>
         </li>
         <li *ngIf="this.app.navbarAdmin == false" class="nav-item" (click)="navigateToPatientsList()">
@@ -31,7 +31,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" (click)="navigateToAccount()">Mi cuenta</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Cerrar Sesión</a>
+          <a (click)="logOut()" class="dropdown-item">Cerrar Sesión</a>
         </div>
       </div>
     </div>

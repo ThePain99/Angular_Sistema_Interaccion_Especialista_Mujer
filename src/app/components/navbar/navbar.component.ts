@@ -28,4 +28,13 @@ export class NavbarComponent implements OnInit {
   navigateToAccount(): void {
     this.router.navigate([`/account`]).then(() => null);
   }
-}
+
+  navigateToConsultsList(): void {
+    this.router.navigate([`/history-consult`]).then(() => null);
+  }
+
+  logOut(): void {
+    this.router.navigate([`/login`]).then(() => null);
+    localStorage.removeItem("userData")
+  }
+ }

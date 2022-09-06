@@ -15,6 +15,10 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
 import { CreateConsultComponent } from './pages/create-consult/create-consult.component';
 import { ListConsultComponent } from './pages/list-consult/list-consult.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {SearchPipe} from "./components/search.pipe";
+import { EditConsultComponent } from './pages/edit-consult/edit-consult.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,6 +44,8 @@ import { PatientSearchPipe } from './components/patient-search.pipe';
     ListConsultComponent,
     UserSearchPipe,
     PatientSearchPipe
+    SearchPipe,
+    EditConsultComponent
 
   ],
   imports: [
