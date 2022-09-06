@@ -9,9 +9,13 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public app: AppComponent, private router: Router) {}
-  ngOnInit(): void {
+  user!: any
+
+  constructor(public app: AppComponent,
+              private router: Router) {
   }
+
+  ngOnInit(): void { }
 
   navigateToPatientsList(): void {
     this.router.navigate([`/patients-list`]).then(() => null);
