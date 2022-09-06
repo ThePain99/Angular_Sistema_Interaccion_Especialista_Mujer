@@ -19,9 +19,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {SearchPipe} from "./components/search.pipe";
 import { EditConsultComponent } from './pages/edit-consult/edit-consult.component';
-import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserSearchPipe } from './components/user-search.pipe';
 import { PatientSearchPipe } from './components/patient-search.pipe';
 
@@ -43,7 +41,7 @@ import { PatientSearchPipe } from './components/patient-search.pipe';
     CreateConsultComponent,
     ListConsultComponent,
     UserSearchPipe,
-    PatientSearchPipe
+    PatientSearchPipe,
     SearchPipe,
     EditConsultComponent
 
