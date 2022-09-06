@@ -16,6 +16,10 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
 import { CreateConsultComponent } from './pages/create-consult/create-consult.component';
 import { ListConsultComponent } from './pages/list-consult/list-consult.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {SearchPipe} from "./components/search.pipe";
+import { EditConsultComponent } from './pages/edit-consult/edit-consult.component';
 
 @NgModule({
   declarations: [
@@ -34,10 +38,15 @@ import { ListConsultComponent } from './pages/list-consult/list-consult.componen
     NewUserComponent,
     CreateConsultComponent,
     ListConsultComponent,
+    SearchPipe,
+    EditConsultComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

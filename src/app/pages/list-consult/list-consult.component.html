@@ -1,9 +1,9 @@
 <div class="container-fluid" style="background-color: white">
   <div class="row py-4">
     <div class="d-flex">
-      <span class="px-4" style="color: black"><b>Consultas</b> (2)</span>
+      <span class="px-4" style="color: black"><b>Consultas</b> ({{consultCount}})</span>
       <div class="input-group ms-auto me-3" style="width: 329px;">
-        <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+        <input [(ngModel)]="searchText" type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
         <button class="btn" type="button" id="button-addon2" style="background-color: #0B3C5D; color: white;"><i class="bi-search"></i></button>
       </div>
     </div>
@@ -23,32 +23,19 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>2022
+      <tr *ngFor="let consult of consults | customerEmailFilter:searchText">
+        <td>{{consult.fechaReserva.substring(0,4)}}
           <i class="bi bi-pencil-fill ms-1 me-1 mt-1"></i>
           <i data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
         </td>
-        <td>Octubre</td>
-        <td>22</td>
-        <td>Jane Cooper</td>
-        <td>Virtual</td>
-        <td>Física, Psicológica, Sexual, Familiar</td>
-        <td>The principal alcohol in Purell hand sanitizer (to take the most talked-about brand)<br> is 70% ethanol (ethyl alcohol),
-          with a smaller amount of isopropyl alcohol.</td>
-        <td style="color: #979797">Finalizada</td>
-      </tr>
-      <tr>
-        <td>2022
-          <i class="bi bi-pencil-fill ms-1 me-1 mt-1"></i>
-          <i class="bi bi-trash-fill mt-1"></i>
-        </td>
-        <td>Octubre</td>
-        <td>21</td>
-        <td>Jane Cooper</td>
-        <td>Virtual</td>
-        <td>Psicológica</td>
-        <td>-</td>
-        <td style="color: #FF0000">Cancelada</td>
+        <td>{{this.monthNames[+consult.fechaReserva.substring(5,7) - 1]}}</td>
+        <td>{{consult.fechaReserva.substring(8,10)}}</td>
+        <td>{{consult.paciente.nombre + " " + consult.paciente.apellido}}</td>
+        <td>{{consult.modalidad.modalidad}}</td>
+        <td>{{consult.violencias}}</td>
+        <td>{{consult.descripcion}}</td>
+        <td *ngIf="consult.estadoConsulta.id == 1" style="color: #979797">{{consult.estadoConsulta.estadoConsulta}}</td>
+        <td *ngIf="consult.estadoConsulta.id == 2" style="color: #FF0000">{{consult.estadoConsulta.estadoConsulta}}</td>
       </tr>
       </tbody>
     </table>

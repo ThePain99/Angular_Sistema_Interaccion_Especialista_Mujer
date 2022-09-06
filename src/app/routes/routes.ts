@@ -11,13 +11,12 @@ import { NewPatientComponent } from "../pages/new-patient/new-patient.component"
 import { EditPatientComponent } from "../pages/edit-patient/edit-patient.component";
 import {CreateConsultComponent} from "../pages/create-consult/create-consult.component";
 import {ListConsultComponent} from "../pages/list-consult/list-consult.component";
+import {EditConsultComponent} from "../pages/edit-consult/edit-consult.component";
 
 
 const index: Routes = [
   { path: 'login' , component: LoginComponent },
-  { path: '', component: LoginComponent },
   { path: 'recover', component: RecoverComponent },
-  { path: 'home', component: ConsultsComponent },
   // ADMIN
   { path: 'account', component: AccountComponent},
   { path: 'users-list', component: UsersListComponent},
@@ -30,6 +29,7 @@ const index: Routes = [
   { path: 'edit-patient', component: EditPatientComponent},
   { path: 'consults', component: ConsultsComponent },
   { path: 'create-consult', component: CreateConsultComponent},
+  { path: 'edit-consult', component: EditConsultComponent},
   { path: 'history-consult', component: ListConsultComponent}
 ];
 
