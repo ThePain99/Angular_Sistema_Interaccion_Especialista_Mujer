@@ -13,4 +13,6 @@ export class AppComponent {
   userLoggedIn = true;
   navbarAdmin = false;
   empty = true;
+  userNotLogged: any
+
 }

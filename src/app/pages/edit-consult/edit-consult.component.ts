@@ -36,13 +36,13 @@ export class EditConsultComponent implements OnInit {
   ngOnInit(): void {
     this.retrievePatients()
     this.retrieveInformation()
+    this.userNotLogged()
   }
 
 
   retrievePatients() {
     let data: any = localStorage.getItem("userData")
     this.user = JSON.parse(data)
-    console.log(this.user.id)
     this._patientsService.getPatientsByUserId(this.user.id)
       .subscribe((res)=>{
         console.log(res)
@@ -55,22 +55,19 @@ export class EditConsultComponent implements OnInit {
   retrieveInformation() {
     let consult: any = localStorage.getItem("consult")
     this.consultEdit = JSON.parse(consult)
-    console.log(this.consultEdit)
     this.form.controls['description'].setValue(this.consultEdit.descripcion)
     this.form.controls['patient'].setValue(this.consultEdit.paciente.id)
     this.form.controls['modality'].setValue(this.consultEdit.modalidad.id)
-    this.form.controls['violent'].setValue(this.consultEdit.violencias[0].id)
+    this.form.controls['violent'].setValue(this.consultEdit.violencias[0])
     this.violentButtonList = this.consultEdit.violencias;
     this.form.controls['date'].setValue(this.consultEdit.fechaReserva.substring(0,10))
     this.form.controls['time'].setValue(this.consultEdit.fechaReserva.substring(11,16))
   }
 
   addViolent(violent: string) {
-    console.log(violent)
     if(!this.violentButtonList.includes(violent)) {
       this.violentButtonList.push(violent)
     }
-    console.log(this.violentButtonList)
   }
 
   deleteViolent(violent: string) {
@@ -83,8 +80,6 @@ export class EditConsultComponent implements OnInit {
     let date = new Date(this.form.value.date + "T" + this.form.value.time + ":00Z")
     let data: any = localStorage.getItem("userData")
     this.user = JSON.parse(data)
-    console.log(Number(this.form.value.modality))
-    console.log(this.consultEdit.estadoConsultaId)
     const consult: Consults = {
       id: this.consultEdit.id,
       fechaReserva: date.toISOString(),
@@ -111,6 +106,13 @@ export class EditConsultComponent implements OnInit {
   }
 
   navigateToConsults() {
+    localStorage.setItem('consult', "");
     this.route.navigate(['consults'])
+  }
+
+  userNotLogged() {
+    if(localStorage.getItem("userData") == null) {
+      this.route.navigate(['login'])
+    }
   }
 }

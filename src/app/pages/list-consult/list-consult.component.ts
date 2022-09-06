@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConsultsService} from "../../services/consults.service";
 import {PatientsService} from "../../services/patients.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-consult',
@@ -13,15 +14,20 @@ export class ListConsultComponent implements OnInit {
   user : any
   consults: any
   consultCount: any
-  aa:boolean=false;
+  consultId: any
   monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
-  constructor(private _consultsService: ConsultsService, private _patientsService: PatientsService) { }
+  constructor(private _consultsService: ConsultsService, private _patientsService: PatientsService, private route: Router) { }
 
   ngOnInit(): void {
     this.getConsults()
+  }
+
+  navigateToEditConsult(consult: any) {
+    localStorage.setItem('consult', JSON.stringify(consult));
+    this.route.navigate(['/edit-consult'])
   }
 
   getConsults() {
@@ -40,8 +46,16 @@ export class ListConsultComponent implements OnInit {
       })
   }
 
-  setIndex(ii: any){
-    this.aa=ii;
-    console.log
+  storeId(id: number) {
+    this.consultId = id;
   }
+
+  delete(id: number) {
+    this._consultsService.delete(id)
+      .subscribe((res)=>{
+        console.log(res)
+      })
+    window.location.reload()
+  }
+
 }

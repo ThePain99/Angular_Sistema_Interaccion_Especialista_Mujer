@@ -8,13 +8,15 @@
 
         <p class="text-white">Ingresa tu correo electrónico</p>
 
-        <div class="form-outline mb-5">
-          <input type="email" id="typeEmailX-2" placeholder="Usuario" class="form-control form-control-lg" />
-        </div>
+        <form [formGroup]="form">
+          <div class="form-outline mb-5">
+            <input type="email" id="typeEmailX-2" formControlName="email" placeholder="Usuario" class="form-control form-control-lg" />
+          </div>
+        </form>
 
         <div class="d-flex justify-content-center">
-          <button class="btn btn-primary btn-lg btn-block text-black bg-white me-3" type="submit">Cancelar</button>
-          <button class="btn btn-primary btn-lg btn-block text-black bg-white" type="submit">Ingresar</button>
+          <button class="btn btn-primary btn-lg btn-block text-black bg-white me-3" (click)="cancel()" type="submit">Cancelar</button>
+          <button class="btn btn-primary btn-lg btn-block text-black bg-white" (click)="recover()" type="submit">Ingresar</button>
         </div>
       </div>
     </div>

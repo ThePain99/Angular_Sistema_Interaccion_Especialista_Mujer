@@ -25,8 +25,8 @@
       <tbody>
       <tr *ngFor="let consult of consults | customerEmailFilter:searchText">
         <td>{{consult.fechaReserva.substring(0,4)}}
-          <i class="bi bi-pencil-fill ms-1 me-1 mt-1"></i>
-          <i data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
+          <i (click)="navigateToEditConsult(consult)" class="bi bi-pencil-fill ms-1 me-1 mt-1"></i>
+          <i (click)="storeId(consult.id)" data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
         </td>
         <td>{{this.monthNames[+consult.fechaReserva.substring(5,7) - 1]}}</td>
         <td>{{consult.fechaReserva.substring(8,10)}}</td>
@@ -36,6 +36,7 @@
         <td>{{consult.descripcion}}</td>
         <td *ngIf="consult.estadoConsulta.id == 1" style="color: #979797">{{consult.estadoConsulta.estadoConsulta}}</td>
         <td *ngIf="consult.estadoConsulta.id == 2" style="color: #FF0000">{{consult.estadoConsulta.estadoConsulta}}</td>
+        <td *ngIf="consult.estadoConsulta.id == 3" style="color: black">{{consult.estadoConsulta.estadoConsulta}}</td>
       </tr>
       </tbody>
     </table>
@@ -55,7 +56,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" style="background-color: white; color: black" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
+          <button (click)="delete(consultId)" type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
         </div>
       </div>
     </div>

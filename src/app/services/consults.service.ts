@@ -49,6 +49,13 @@ export class ConsultsService {
         catchError(this.handleError));
   }
 
+  delete(id : number):Observable<any> {
+    return this.http.delete(`${this.apiURL}/${id}`, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
+  }
+
   getConsultsByUserId(userId : number):Observable<any> {
     return this.http.get(`${this.apiURL}/?${userId}`, this.httpOptions)
       .pipe(
