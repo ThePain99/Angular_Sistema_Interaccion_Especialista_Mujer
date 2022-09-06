@@ -50,5 +50,12 @@ export class UsersService {
         catchError(this.handleError));
   }
 
+  recover(email: string):Observable<any> {
+    return this.http.get(`${this.apiURL}/recover/${email}`, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
+  }
+
 
 }

@@ -43,27 +43,30 @@
   <div style="margin-right: 41px; margin-left: 43px; margin-top: 11px" *ngFor="let consultGroup of this.groupArrays">
     <span *ngIf="searchText == ''" class="fw-semibold" style="font-size: 20px; margin-left: 41px;">{{consultGroup.date}}</span>
     <div class="justify-content-center align-items-center h-100" *ngFor="let consult of consultGroup.games | customerEmailFilter: searchText">
-      <div class="card" style="margin-bottom: 13px">
+      <div *ngIf="consult.estadoConsulta.id == 3" class="card" style="margin-bottom: 13px">
         <div class="d-flex">
           <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 303.84px; height: 192px;"/>
           <div class="card-body">
             <div>
-              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #1D2731">Virtual</span>
-              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #328CC1">Física</span>
-              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #328CC1">Sexual</span>
+              <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #1D2731">{{consult.modalidad.modalidad}}</span>
+              <ng-container *ngFor="let tags of consult.violencias">
+                <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #328CC1">{{tags}}</span>
+              </ng-container>
               <span class="fw-semibold float-end" style="font-size: 20px">{{consult.fechaReserva.split("T")[1].substring(0,5)}}</span>
             </div>
             <div class="d-flex">
               <h5 class="fw-normal card-title mt-1 me-2">{{consult.paciente.nombre + " " +consult.paciente.apellido}}</h5>
               <i (click)="navigateToEditConsult(consult)" class="bi bi-pencil-fill mt-1"></i>
-              <i data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
+              <i (click)="storeId(consult.id)" data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
             </div>
             <div class=" col-md-6 col-xl-5">
               <p class="card-text" style="font-size: 13px">{{consult.descripcion}}</p>
             </div>
             <div class="text-end align-text-bottom mt-2">
-              <a *ngIf="localTime.getTime() >= toDate(consult.fechaReserva).getTime()" href="#" class="btn text-white" style="background-color: #0B3C5D; width: 164px">Finalizar</a>
-              <a *ngIf="localTime.getTime() <= toDate(consult.fechaReserva).getTime()" href="#" class="btn text-white" style="background-color: rgba(255, 0, 0, 0.61); width: 164px">Cancelar</a>
+              <a *ngIf="localTime.getTime() >= toDate(consult.fechaReserva).getTime()"
+                 (click)="update(consult, 1)" class="btn text-white" style="background-color: #0B3C5D; width: 164px">Finalizar</a>
+              <a *ngIf="localTime.getTime() <= toDate(consult.fechaReserva).getTime()"
+                 (click)="update(consult, 2)" class="btn text-white" style="background-color: rgba(255, 0, 0, 0.61); width: 164px">Cancelar</a>
             </div>
           </div>
 
@@ -90,7 +93,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" style="background-color: white; color: black" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
+          <button (click)="delete(consultId)" type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ import {EditConsultComponent} from "../pages/edit-consult/edit-consult.component
 const index: Routes = [
   { path: 'login' , component: LoginComponent },
   { path: 'recover', component: RecoverComponent },
+  { path: '' , component: LoginComponent },
   // ADMIN
   { path: 'account', component: AccountComponent},
   { path: 'user/:id/users-list', component: UsersListComponent},

@@ -45,7 +45,6 @@ export class CreateConsultComponent implements OnInit {
   retrievePatients() {
     let data: any = localStorage.getItem("userData")
     this.user = JSON.parse(data)
-    console.log(this.user.id)
     this._patientsService.getPatientsByUserId(this.user.id)
       .subscribe((res)=>{
         console.log(res)
@@ -60,7 +59,6 @@ export class CreateConsultComponent implements OnInit {
     if(this.editable == "true") {
       let consult: any = localStorage.getItem("consult")
       this.consultEdit = JSON.parse(consult)
-      console.log(this.consultEdit)
       this.form.controls['description'].setValue(this.consultEdit.descripcion)
       this.form.controls['patient'].setValue(this.consultEdit.paciente.id)
       this.form.controls['modality'].setValue(this.consultEdit.modalidad.id)
@@ -71,11 +69,9 @@ export class CreateConsultComponent implements OnInit {
   }
 
   addViolent(violent: string) {
-    console.log(violent)
     if(!this.violentButtonList.includes(violent)) {
       this.violentButtonList.push(violent)
     }
-    console.log(this.violentButtonList)
   }
 
   deleteViolent(violent: string) {
@@ -88,7 +84,6 @@ export class CreateConsultComponent implements OnInit {
     let date = new Date(this.form.value.date + "T" + this.form.value.time + ":00Z")
     let data: any = localStorage.getItem("userData")
     this.user = JSON.parse(data)
-    console.log(Number(this.form.value.modality))
     const consult: Consults = {
       id: this.form.value.id,
       fechaReserva: date.toISOString(),

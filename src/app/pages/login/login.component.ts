@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
         {
           alert('Email or password are wrong')
         } else {
-          console.log(res.password);
           if (res.status == 'Success') {
             this.route.navigate(['consults'])
             localStorage.setItem('userData', JSON.stringify(res.data));

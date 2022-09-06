@@ -33,6 +33,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([`/history-consult`]).then(() => null);
   }
 
+  navigateToConsults(): void {
+    this.router.navigate([`/consults`]).then(() => null);
+  }
+
   logOut(): void {
     this.router.navigate([`/login`]).then(() => null);
     localStorage.removeItem("userData")

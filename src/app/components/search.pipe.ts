@@ -10,7 +10,7 @@ export class SearchPipe implements PipeTransform {
       return consults;
     }
     return consults.filter((val: any) => {
-      return (val.paciente.nombre.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+      return ((val.paciente.nombre + " " + val.paciente.apellido).toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
     })
   }
 
