@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UsersListComponent implements OnInit {
 
-  id!: number
+  user!: any
   allUsers!: any
   public page = 1
   public pageSize = 10
@@ -20,10 +20,9 @@ export class UsersListComponent implements OnInit {
   
   constructor(public app: AppComponent,
               private router: Router,
-              private userService: UserService,
-              private route: ActivatedRoute) {
-    this.app.navbarAdmin = true;
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+              private userService: UserService) {
+    let data: any = localStorage.getItem("userData")
+    this.user = JSON.parse(data)
   }
 
   ngOnInit(): void {
@@ -56,11 +55,11 @@ export class UsersListComponent implements OnInit {
   }
 
   navigateToEditUser(userId: number): void {
-    this.router.navigate([`/user/${this.id}/users-list/${userId}/edit-user`]).then(() => null);
+    this.router.navigate([`/users-list/${userId}/edit-user`]).then(() => null);
   }
 
   navigateToNewUser(): void {
-    this.router.navigate([`/user/${this.id}/users-list/new-user`]).then(() => null);
+    this.router.navigate([`/users-list/new-user`]).then(() => null);
   }
 
 }

@@ -38,7 +38,12 @@ export class LoginComponent implements OnInit {
           alert('Email or password are wrong')
         } else {
           if (res.status == 'Success') {
-            this.route.navigate(['consults'])
+            if (res.data.tipo == false) {
+              this.route.navigate(['users-list'])
+            }
+            else {
+              this.route.navigate(['consults'])
+            }
             localStorage.setItem('userData', JSON.stringify(res.data));
             this.app.userLoggedIn = true;
           } else {

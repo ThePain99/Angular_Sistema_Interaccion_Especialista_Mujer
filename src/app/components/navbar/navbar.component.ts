@@ -13,6 +13,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(public app: AppComponent,
               private router: Router) {
+    let data: any = localStorage.getItem("userData")
+    this.user = JSON.parse(data)
   }
 
   ngOnInit(): void { }

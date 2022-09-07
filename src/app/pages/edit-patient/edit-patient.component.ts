@@ -10,7 +10,7 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class EditPatientComponent implements OnInit {
 
-  id!: number
+  user!: any
   patientId!: any
   patient!: any
   name!: string
@@ -23,8 +23,8 @@ export class EditPatientComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private patientService: PatientService) {
-    this.app.navbarAdmin = false;
-    this.id = Number(this.route.snapshot.paramMap.get('id'))
+    let data: any = localStorage.getItem("userData")
+    this.user = JSON.parse(data)
     this.patientId = Number(this.route.snapshot.paramMap.get('patientId'))
   }
 
@@ -76,7 +76,7 @@ export class EditPatientComponent implements OnInit {
   }
 
   navigateToPatientsList(): void {
-    this.router.navigate([`/user/${this.id}/patients-list`]).then(() => null);
+    this.router.navigate([`/patients-list`]).then(() => null);
   }
 
 }

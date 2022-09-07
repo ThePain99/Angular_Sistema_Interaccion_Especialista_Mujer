@@ -11,9 +11,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditUserComponent implements OnInit {
 
-  id!: number
-  userId!: any
   user!: any
+  userId!: any
+  userEdited!: any
   name!: string
   lastName!: string
   dni!: string
@@ -26,16 +26,16 @@ export class EditUserComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private userService: UserService) {
-    this.app.navbarAdmin = true;
-    this.id = Number(this.route.snapshot.paramMap.get('id'))
+    let data: any = localStorage.getItem("userData")
+    this.user = JSON.parse(data)
     this.userId = Number(this.route.snapshot.paramMap.get('userId'))
-    this.getUserById(this.userId)
+    this.getUserById()
     this.userType = -1
     this.modalityId = -1
   }
 
   ngOnInit(): void {
-    this.getUserById(this.userId)
+    this.getUserById()
   }
 
   changeType(e: Event) {
@@ -62,17 +62,17 @@ export class EditUserComponent implements OnInit {
     this.email = (e.target as any).value;
   }
 
-  getUserById(userId: number): void {
+  getUserById(): void {
     this.userService.getUserById(this.userId)
     .subscribe((response: any) => {
-      this.user = response['data']
-      this.name = this.user.nombre
-      this.lastName = this.user.apellido
-      this.dni = this.user.dni
-      this.email = this.user.correo
-      this.userType = Number(this.user.tipo)
-      if(this.user.modalidadId == null) {
-        this.modalityId = this.user.modalidadId
+      this.userEdited = response['data']
+      this.name = this.userEdited.nombre
+      this.lastName = this.userEdited.apellido
+      this.dni = this.userEdited.dni
+      this.email = this.userEdited.correo
+      this.userType = Number(this.userEdited.tipo)
+      if(this.userEdited.modalidadId == null) {
+        this.modalityId = this.userEdited.modalidadId
       }
       else {
         this.modalityId = 1
@@ -81,20 +81,23 @@ export class EditUserComponent implements OnInit {
   }
 
   save() {
-    this.user.nombre = this.name
-    this.user.apellido = this.lastName
-    this.user.dni = this.dni
-    this.user.correo = this.email
-    this.user.tipo = Boolean(this.userType)
+    this.userEdited.nombre = this.name
+    this.userEdited.apellido = this.lastName
+    this.userEdited.dni = this.dni
+    this.userEdited.correo = this.email
+    this.userEdited.tipo = Boolean(this.userType)
     if (this.userType == 1) {
-      this.user.modalidadId = this.modalityId
+      this.userEdited.modalidadId = this.modalityId
     }
-    this.userService.updateUser(this.user). subscribe((Response: any) => {
+    this.userService.updateUser(this.userEdited). subscribe((Response: any) => {
+      if(this.userEdited.id == this.userId) {
+        localStorage.setItem('userData', JSON.stringify(this.userEdited));
+      }
       this.navigateToUsersList()
     })
   }
 
   navigateToUsersList(): void {
-    this.router.navigate([`/user/${this.id}/users-list`]).then(() => null);
+    this.router.navigate([`/users-list`]).then(() => null);
   }
 }

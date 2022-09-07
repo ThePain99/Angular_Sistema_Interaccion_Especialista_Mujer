@@ -18,16 +18,19 @@ const index: Routes = [
   { path: 'login' , component: LoginComponent },
   { path: 'recover', component: RecoverComponent },
   { path: '' , component: LoginComponent },
-  // ADMIN
-  { path: 'account', component: AccountComponent},
-  { path: 'user/:id/users-list', component: UsersListComponent},
-  { path: 'user/:id/users-list/new-user', component: NewUserComponent},
-  { path: 'user/:id/users-list/:userId/edit-user', component: EditUserComponent},
 
-  // ESPECIALISTA
-  { path: 'user/:id/patients-list', component: PatientsListComponent},
-  { path: 'user/:id/patients-list/new-patient', component: NewPatientComponent},
-  { path: 'user/:id/patients-list/:patientId/edit-patient', component: EditPatientComponent},
+  // GENERAL
+  { path: 'account', component: AccountComponent},
+
+  // USER ADMIN
+  { path: 'users-list', component: UsersListComponent},
+  { path: 'users-list/new-user', component: NewUserComponent},
+  { path: 'users-list/:userId/edit-user', component: EditUserComponent},
+
+  // USER ESPECIALISTA
+  { path: 'patients-list', component: PatientsListComponent},
+  { path: 'patients-list/new-patient', component: NewPatientComponent},
+  { path: 'patients-list/:patientId/edit-patient', component: EditPatientComponent},
   { path: 'consults', component: ConsultsComponent },
   { path: 'create-consult', component: CreateConsultComponent},
   { path: 'edit-consult', component: EditConsultComponent},

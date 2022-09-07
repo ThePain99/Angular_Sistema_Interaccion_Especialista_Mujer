@@ -8,16 +8,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <li *ngIf="this.app.navbarAdmin == false" class="nav-item" (click)="navigateToConsults()">
+        <li *ngIf="this.user.tipo == true" class="nav-item" (click)="navigateToConsults()">
           <a class="btn nav-link text-white">Consultas</a>
         </li>
-        <li *ngIf="this.app.navbarAdmin == false" class="nav-item" (click)="navigateToConsultsList()">
+        <li *ngIf="this.user.tipo == true" class="nav-item" (click)="navigateToConsultsList()">
           <a class="btn nav-link text-white">Historial</a>
         </li>
-        <li *ngIf="this.app.navbarAdmin == false" class="nav-item" (click)="navigateToPatientsList()">
+        <li *ngIf="this.user.tipo == true" class="nav-item" (click)="navigateToPatientsList()">
           <a class="btn nav-link text-white">Pacientes</a>
         </li>
-        <li *ngIf="this.app.navbarAdmin == true" class="nav-item" (click)="navigateToUsersList()">
+        <li *ngIf="this.user.tipo == false" class="nav-item" (click)="navigateToUsersList()">
           <a class="btn nav-link text-white">Usuarios</a>
         </li>
 
@@ -26,7 +26,7 @@
         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 35px;"
              alt="Avatar" />
         <a class="btn text-white dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Nombre Usuario
+          {{this.user.nombre}} {{this.user.apellido}}
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" (click)="navigateToAccount()">Mi cuenta</a>

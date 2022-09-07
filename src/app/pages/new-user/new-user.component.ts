@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NewUserComponent implements OnInit {
   
-  id!: number
+  user!: any
   name!: string
   lastName!: string
   dni!: string
@@ -21,10 +21,9 @@ export class NewUserComponent implements OnInit {
 
   constructor(public app: AppComponent,
               private router: Router,
-              private route: ActivatedRoute,
               private userService: UserService) {
-    this.app.navbarAdmin = true
-    this.id = Number(this.route.snapshot.paramMap.get('id'))
+    let data: any = localStorage.getItem("userData")
+    this.user = JSON.parse(data)
     this.userType = -1
     this.modalityId = -1
   }
@@ -91,7 +90,7 @@ export class NewUserComponent implements OnInit {
   }
 
   navigateToUsersList(): void {
-    this.router.navigate([`/user/${this.id}/users-list`]).then(() => null);
+    this.router.navigate([`/users-list`]).then(() => null);
   }
 
 }

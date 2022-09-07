@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { PatientService } from 'src/app/services/patient.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-patients-list',
@@ -11,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class PatientsListComponent implements OnInit {
 
-  id!: number
+  user!: any
   allPatients!: Array<any>
   public page = 1
   public pageSize = 10
@@ -21,11 +20,9 @@ export class PatientsListComponent implements OnInit {
 
   constructor(public app: AppComponent,
               private router: Router,
-              private patientService: PatientService,
-              private userService: UserService,
-              private route: ActivatedRoute) {
-    this.app.navbarAdmin = false;
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+              private patientService: PatientService) {
+    let data: any = localStorage.getItem("userData")
+    this.user = JSON.parse(data)
   }
 
   ngOnInit(): void {
@@ -33,7 +30,7 @@ export class PatientsListComponent implements OnInit {
   }
 
   getAllPatientsByUserId(): void {
-    this.patientService.getAllPatientsByUserId(this.id)
+    this.patientService.getAllPatientsByUserId(this.user.id)
     .subscribe((response: any) => {
       if (!response) {
         return
@@ -43,7 +40,7 @@ export class PatientsListComponent implements OnInit {
   }
 
   deletePatientById(): void {
-    this.patientService.deletePatientByIdAndUserId(this.id, this.deleteId)
+    this.patientService.deletePatientByIdAndUserId(this.user.id, this.deleteId)
     .subscribe(() => {
       window.location.reload()
     })
@@ -58,11 +55,11 @@ export class PatientsListComponent implements OnInit {
   }
   
   navigateToEditPatient(userId: number): void {
-    this.router.navigate([`/user/${this.id}/patients-list/${userId}/edit-patient`]).then(() => null);
+    this.router.navigate([`/patients-list/${userId}/edit-patient`]).then(() => null);
   }
 
   navigateToNewPatient(): void {
-    this.router.navigate([`/user/${this.id}/patients-list/new-patient`]).then(() => null);
+    this.router.navigate([`/patients-list/new-patient`]).then(() => null);
   }
 
 }

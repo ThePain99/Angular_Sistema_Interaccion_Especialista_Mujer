@@ -11,8 +11,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'TDPANGULAR';
   userLoggedIn = true;
-  navbarAdmin = false;
-  empty = true;
   userNotLogged: any
 
 }

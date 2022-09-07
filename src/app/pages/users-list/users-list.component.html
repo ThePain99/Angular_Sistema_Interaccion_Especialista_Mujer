@@ -24,7 +24,7 @@
   <div class="container-fluid" id="header" style="background-color: white">
     <div id="row" class="row py-4">
       <div class="col-xl-8 col-md-8 col-sm-6 col-6">
-        <span style="color: black"><b>Usuarios app </b>{{allUsers.length}}</span>
+        <span style="color: black"><b>Usuarios app </b>({{allUsers.length}})</span>
       </div>
       <div class="col-xl-3 col-md-3 col-sm-5 col-5">
         <div class="input-group">
@@ -59,7 +59,7 @@
               <span role="button" (click)="navigateToEditUser(item.id)">
                 <i id="icon" class="bi bi-pencil-fill"></i>
               </span>
-              <span class="mx-1" role="button" data-toggle="modal" data-target="#deleteUser" (click)="deleteUser(item.id)">
+              <span *ngIf="this.user.id != item.id" class="mx-1" role="button" data-toggle="modal" data-target="#deleteUser" (click)="deleteUser(item.id)">
                 <i id="icon" class="bi bi-trash-fill"></i>
               </span>
             </td>

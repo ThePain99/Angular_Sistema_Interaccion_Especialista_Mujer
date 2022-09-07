@@ -11,7 +11,7 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class NewPatientComponent implements OnInit {
 
-  id!: number
+  user!: any
   userId!: number
   name!: string
   lastName!: string
@@ -23,8 +23,8 @@ export class NewPatientComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private patientService: PatientService) {
-    this.app.navbarAdmin = false;
-    this.id = Number(this.route.snapshot.paramMap.get('id'))
+    let data: any = localStorage.getItem("userData")
+    this.user = JSON.parse(data)
     this.userId = Number(this.route.snapshot.paramMap.get('userId'))
   }
 
@@ -52,11 +52,6 @@ export class NewPatientComponent implements OnInit {
   }
 
   save(): void {
-    console.log(this.name)
-    console.log(this.lastName)
-    console.log(this.dni)
-    console.log(this.email)
-    console.log(this.cellphone)
     this.patientService.createPatient(
       new Patient(
         this.name, 
@@ -70,6 +65,6 @@ export class NewPatientComponent implements OnInit {
   }
 
   navigateToPatientsList(): void {
-    this.router.navigate([`/user/${this.id}/patients-list`]).then(() => null);
+    this.router.navigate([`/patients-list`]).then(() => null);
   }
 }

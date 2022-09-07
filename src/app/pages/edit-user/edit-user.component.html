@@ -11,20 +11,20 @@
         <p style="color: #4F4F4F" id="text">Nombres y Apellidos<b style="color: #FF0000">*</b></p>
         <div class="row">
             <div class="col-lg-3 col-md-4">
-                <input type="text" class="form-control" placeholder="Nombres" value="{{this.user.nombre}}" (change)="changeName($event)" #name required>
+                <input type="text" class="form-control" placeholder="Nombres" value="{{this.userEdited.nombre}}" (change)="changeName($event)" #name required>
             </div>
             <div class="col-lg-3 col-md-4">
-                <input type="text" class="form-control" placeholder="Apellidos" value="{{this.user.apellido}}" (change)="changeLastName($event)" #lastName required>
+                <input type="text" class="form-control" placeholder="Apellidos" value="{{this.userEdited.apellido}}" (change)="changeLastName($event)" #lastName required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <p style="color: #4F4F4F" id="text">DNI<b style="color: #FF0000">*</b></p>
-                <input type="text" class="form-control" placeholder="DNI" value="{{this.user.dni}}" (change)="changeDni($event)" #dni required>
+                <input type="text" class="form-control" placeholder="DNI" value="{{this.userEdited.dni}}" (change)="changeDni($event)" #dni required>
             </div>
             <div class="col-lg-3 col-md-4">
                 <p style="color: #4F4F4F" id="text">Correo electrónico<b style="color: #FF0000">*</b></p>
-                <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" value="{{this.user.correo}}" (change)="changeEmail($event)" #email required>
+                <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" value="{{this.userEdited.correo}}" (change)="changeEmail($event)" #email required>
             </div>
         </div>
         

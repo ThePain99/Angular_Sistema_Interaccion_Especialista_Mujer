@@ -29,6 +29,11 @@ export class UserService {
     return throwError('Something happened with request, please try again later.')
   }
 
+  login(email: string, password: string):Observable<any> {
+    return this.http.get(`${this.basePath}/login/${email}/${password}`)
+    .pipe(retry(2),catchError(this.handleError));
+  }
+
   getAllUsers(): Observable<User>{
     return this.http.get<User>(this.basePath)
     .pipe(retry(2),catchError(this.handleError))
