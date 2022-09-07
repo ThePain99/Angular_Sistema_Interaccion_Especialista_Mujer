@@ -6,7 +6,7 @@ export class User {
     contrasena: string
     estado: boolean
     tipo: boolean
-    modalidadId: number
+    modalidadId: any
 
     constructor(name: string,
                 lastName: string,
@@ -15,7 +15,7 @@ export class User {
                 password: string,
                 state: boolean,
                 userType: boolean,
-                modalityId: number) {
+                modalityId: any) {
         this.nombre = name
         this.apellido = lastName
         this.dni = dni

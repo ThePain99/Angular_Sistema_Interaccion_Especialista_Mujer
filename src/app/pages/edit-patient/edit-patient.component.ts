@@ -29,7 +29,7 @@ export class EditPatientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPatientById(this.patientId)
+    this.getPatientById()
   }
 
   changeName(e: Event) {
@@ -52,7 +52,7 @@ export class EditPatientComponent implements OnInit {
     this.cellphone = (e.target as any).value;
   }
 
-  getPatientById(patientId: number): void {
+  getPatientById(): void {
     this.patientService.getPatientById(this.patientId)
     .subscribe((response: any) => {
       this.patient = response['data']

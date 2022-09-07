@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -19,8 +18,7 @@ export class EditUserComponent implements OnInit {
   dni!: string
   email!: string
   userType!: number
-  modalityId!: number
-  enabled!: boolean
+  modalityId!: any
 
   constructor(public app: AppComponent, 
               private router: Router,
@@ -36,6 +34,24 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserById()
+  }
+
+  enabled(): any {
+    if (this.userType == 0) {
+      this.modalityId = 0
+      return true
+    }
+    else if (this.userType == 1) {
+      if (this.modalityId >= 1 && this.modalityId <=3) {
+        return true
+      }
+      else {
+        return false
+      }
+    } else {
+      this.modalityId = 0
+      return false
+    }
   }
 
   changeType(e: Event) {
@@ -72,10 +88,9 @@ export class EditUserComponent implements OnInit {
       this.email = this.userEdited.correo
       this.userType = Number(this.userEdited.tipo)
       if(this.userEdited.modalidadId == null) {
+        this.modalityId = 0
+      } else {
         this.modalityId = this.userEdited.modalidadId
-      }
-      else {
-        this.modalityId = 1
       }
     })
   }
@@ -88,6 +103,9 @@ export class EditUserComponent implements OnInit {
     this.userEdited.tipo = Boolean(this.userType)
     if (this.userType == 1) {
       this.userEdited.modalidadId = this.modalityId
+    }
+    else {
+      this.userEdited.modalidadId = null
     }
     this.userService.updateUser(this.userEdited). subscribe((Response: any) => {
       if(this.userEdited.id == this.userId) {

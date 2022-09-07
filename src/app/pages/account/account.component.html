@@ -27,30 +27,39 @@
                 <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" value="{{this.user.correo}}" disabled #email required>
             </div>
         </div>
-        
-        <p style="color: #4F4F4F" id="subtitle-2"><b>ACTUALIZAR CONTRASEÑA</b></p>
-        <p style="color: #4F4F4F" id="text">Contraseña actual</p>
-        <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <input type="password" class="form-control" placeholder="Contraseña actual" (change)="changePassword($event)" #password required>
-            </div>   
-        </div>
-        <p style="color: #4F4F4F" id="text">Nueva contraseña</p>
-        <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <input type="password" class="form-control" placeholder="Confirmar nueva contraseña" (change)="changeNewPassword($event)" #newPassword required>
-            </div> 
-        </div>
-        <p style="color: #4F4F4F" id="text">Confirmar nueva contraseña</p>
-        <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <input type="password" class="form-control" placeholder="Confirmar nueva contraseña" (change)="changeNewPasswordConfirmation($event)" #newPasswordConfirmation required>
+        <form class="was-validation">
+            <p style="color: #4F4F4F" id="subtitle-2"><b>ACTUALIZAR CONTRASEÑA</b></p>
+            <p style="color: #4F4F4F" id="text">Contraseña actual</p>
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <input id="password" type="password" class="form-control" placeholder="Contraseña actual" (change)="changePassword($event)" #password required>
+                </div>
+                <div class="invalid-feedback">
+                    Complete este campo.
+                </div>
             </div>
-        </div> 
-        
+            <p style="color: #4F4F4F" id="text">Nueva contraseña</p>
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <input id="newPassword" type="password" class="form-control" placeholder="Confirmar nueva contraseña" (change)="changeNewPassword($event)" #newPassword required>
+                </div> 
+                <div class="invalid-feedback">
+                    Complete este campo.
+                </div>
+            </div>
+            <p style="color: #4F4F4F" id="text">Confirmar nueva contraseña</p>
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <input id="newPasswordConfirmation" type="password" class="form-control" placeholder="Confirmar nueva contraseña" (change)="changeNewPasswordConfirmation($event)" #newPasswordConfirmation required>
+                </div>
+                <div class="invalid-feedback">
+                    Complete este campo.
+                </div>
+            </div>
+        </form>
         <div class="row justify-content-end py-4">
             <div class="col-auto">
-                <button class="btn btn-secondary" style="background-color:white; color:black" type="submit">Cancelar</button>
+                <button class="btn btn-secondary" style="background-color:white; color:black" type="submit" (click)="close()">Cancelar</button>
             </div>
             <div class="col-auto" style="color:white">
                 <button *ngIf="this.password.value.length==0 || this.newPassword.value.length==0 || this.newPasswordConfirmation.value.length==0 || this.equal!=true"

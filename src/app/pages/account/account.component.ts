@@ -58,7 +58,11 @@ export class AccountComponent implements OnInit {
         if (response.status == 'Success') {
           this.user.contrasena = this.newPassword
           this.userService.updateUser(this.user). subscribe((response: any) => {
-            this.navigateToUsersList()
+            if (this.user.tipo == 0) {
+              this.navigateToUsersList()
+            } else {
+              this.navigateToConsults()
+            }
           })
         }},
         error => {
@@ -66,8 +70,20 @@ export class AccountComponent implements OnInit {
         }
       )
   }
+  
+  close() {
+    if (this.user.tipo == 0) {
+      this.navigateToUsersList()
+    } else {
+      this.navigateToConsults()
+    }
+  }
 
   navigateToUsersList(): void {
     this.router.navigate([`/users-list`]).then(() => null);
+  }
+
+  navigateToConsults(): void {
+    this.router.navigate([`/consults`]).then(() => null);
   }
 }

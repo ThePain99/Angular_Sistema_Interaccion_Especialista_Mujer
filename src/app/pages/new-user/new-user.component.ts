@@ -17,7 +17,7 @@ export class NewUserComponent implements OnInit {
   dni!: string
   email!: string
   userType!: number
-  modalityId!: number
+  modalityId!: any
 
   constructor(public app: AppComponent,
               private router: Router,
@@ -33,10 +33,8 @@ export class NewUserComponent implements OnInit {
 
   save(): void {
     if (this.userType == 0) {
-      this.modalityId = 1
+      this.modalityId = null
     }
-    console.log(this.userType)
-
     this.userService.createUser(
       new User(
         this.name, 
@@ -45,7 +43,7 @@ export class NewUserComponent implements OnInit {
         this.email,
         'qwerty123',
         false,
-        Boolean(this.userType),
+        Boolean(Number(this.userType)),
         this.modalityId))
         .subscribe((response: any) => {
       this.navigateToUsersList()
@@ -54,13 +52,18 @@ export class NewUserComponent implements OnInit {
 
   enabled(): any {
     if (this.userType == 0) {
+      this.modalityId = 0
       return true
     }
     else if (this.userType == 1) {
-      if (this.modalityId >= 0 && this.modalityId <=3) {
+      if (this.modalityId >= 1 && this.modalityId <=3) {
         return true
       }
+      else {
+        return false
+      }
     } else {
+      this.modalityId = 0
       return false
     }
   }

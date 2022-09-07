@@ -58,7 +58,8 @@ export class NewPatientComponent implements OnInit {
         this.lastName,
         this.dni,
         this.email, 
-        this.cellphone))
+        this.cellphone,
+        this.user.id))
         .subscribe((response: any) => {
       this.navigateToPatientsList()
     })
