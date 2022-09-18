@@ -17,19 +17,20 @@ export class ConsultsComponent implements OnInit {
   consultId: any
   consults: any
   groupArrays : any
-  consultCount: any
-  searchText: string;
+  consultCount: number = 0
+  searchText: string
+  spinnerBoolean: boolean
   localTime!: Date
 
   constructor(private _consultsService: ConsultsService, private app: AppComponent, private _patientsService: PatientsService, private route: Router) {
-    this.app.userLoggedIn = true
-    this.validateConsults()
     this.searchText = ''
+    this.spinnerBoolean = false
   }
 
   ngOnInit(): void {
     this.validateConsults()
     this.localTime = new Date()
+    this.spinnerBoolean = false
   }
 
 
@@ -43,7 +44,7 @@ export class ConsultsComponent implements OnInit {
     this._consultsService.getConsultsByUserId(this.user.id)
       .subscribe((res)=>{
         console.log(res)
-        if (res.data != null) {
+        if (res.data.length > 0) {
           this.consultExist = true;
           this.consults = res.data;
           let array = [] as any
@@ -74,11 +75,16 @@ export class ConsultsComponent implements OnInit {
           );
 
           this.consultCount = array.length;
-
+          this.spinnerBoolean = true
         } else {
           this.consultExist = false;
+          this.spinnerBoolean = true
         }
       })
+  }
+
+  navigateToCreateConsult() {
+    this.route.navigate(['/create-consult'])
   }
 
   navigateToEditConsult(consult: any) {
@@ -100,16 +106,16 @@ export class ConsultsComponent implements OnInit {
     this._consultsService.update(consult)
       .subscribe((res)=>{
         console.log(res)
+        window.location.reload()
       })
-    window.location.reload()
   }
 
   delete(id: number) {
     this._consultsService.delete(id)
       .subscribe((res)=>{
         console.log(res)
+        window.location.reload()
       })
-    window.location.reload()
   }
 
   storeId(id: number) {

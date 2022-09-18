@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  basePath = 'http://localhost:8080/interaction/usuario'
+  basePath = 'https://interaction-specialist.uc.r.appspot.com/interaction/usuario'
 
   constructor(private http:HttpClient) { }
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,5 +13,15 @@ export class AppComponent {
   title = 'TDPANGULAR';
   userLoggedIn = true;
   userNotLogged: any
+
+  constructor(private route: Router) {
+    this.validate()
+  }
+  validate() {
+    if(localStorage.getItem("userData") == null && localStorage.getItem("recover") == null)
+    {
+      this.route.navigate(['/login'])
+    }
+  }
 
 }

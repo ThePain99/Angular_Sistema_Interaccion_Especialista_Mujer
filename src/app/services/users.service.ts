@@ -16,7 +16,7 @@ export class UsersService {
   }
 
 
-  private apiURL = `http://localhost:8080/interaction/usuario`;
+  private apiURL = `https://interaction-specialist.uc.r.appspot.com/interaction/usuario`;
   constructor(private http: HttpClient) { }
 
   handleError(error: HttpErrorResponse)

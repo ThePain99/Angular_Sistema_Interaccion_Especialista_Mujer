@@ -8,8 +8,8 @@ import { Patient } from '../models/patient';
   providedIn: 'root'
 })
 export class PatientService {
-  
-  basePath = 'http://localhost:8080/interaction/paciente'
+
+  basePath = 'https://interaction-specialist.uc.r.appspot.com/interaction/paciente'
   constructor(private http:HttpClient) { }
 
   httpOptions = {

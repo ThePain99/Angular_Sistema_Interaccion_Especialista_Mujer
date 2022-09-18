@@ -35,6 +35,7 @@ export class RecoverComponent implements OnInit {
         } else {
           if (res.status == 'Success') {
             this.route.navigate(['consults'])
+            localStorage.removeItem('recover');
             localStorage.setItem('userData', JSON.stringify(res.data));
             this.app.userLoggedIn = true;
           } else {

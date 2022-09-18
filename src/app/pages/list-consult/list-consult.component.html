@@ -1,66 +1,91 @@
-<div class="container-fluid" style="background-color: white">
-  <div class="row py-4">
-    <div class="d-flex">
-      <span class="px-4" style="color: black"><b>Consultas</b> ({{consultCount}})</span>
-      <div class="input-group ms-auto me-3" style="width: 329px;">
-        <input [(ngModel)]="searchText" type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
-        <button class="btn" type="button" id="button-addon2" style="background-color: #0B3C5D; color: white;"><i class="bi-search"></i></button>
+<section *ngIf="consultCount==0" class="vh-100" style="background-color: #EDE9E9">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+
+      <div class="col-8 col-md-6 col-lg-5 col-xl-4 text-center">
+        <img src="assets/images/empty_state.png" class="rounded-circle" style="width: 192.45px;"/>
+        <div style="height: 40px"></div>
+        <div>
+          <span class="fw-semibold" style="font-size: 15px">Aún no cuentas con un historial</span>
+          <img src="assets/images/user_icon.png" class="rounded-circle ms-2" style="width: 30px;"/>
+        </div>
+        <div class="mt-2">
+          <span class="fw-normal" style="font-size: 15px">Finaliza </span>
+          <span class="fw-semibold" style="font-size: 15px">consultas </span>
+          <span class="fw-normal" style="font-size: 15px">para poder visualizar el </span>
+          <span class="fw-semibold" style="font-size: 15px">historial.</span>
+        </div>
+
       </div>
     </div>
   </div>
-  <div class="table-responsive px-4">
-    <table class="table table-hover" style="background-color: white">
-      <thead>
-      <tr>
-        <th scope="col">Año</th>
-        <th scope="col">Mes</th>
-        <th scope="col">Día</th>
-        <th scope="col">Nombre y Apellido</th>
-        <th scope="col">Modalidad</th>
-        <th scope="col">Violencia</th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Estado</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let consult of consults | customerEmailFilter:searchText">
-        <td>{{consult.fechaReserva.substring(0,4)}}
-          <i (click)="navigateToEditConsult(consult)" class="bi bi-pencil-fill ms-1 me-1 mt-1"></i>
-          <i (click)="storeId(consult.id)" data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
-        </td>
-        <td>{{this.monthNames[+consult.fechaReserva.substring(5,7) - 1]}}</td>
-        <td>{{consult.fechaReserva.substring(8,10)}}</td>
-        <td>{{consult.paciente.nombre + " " + consult.paciente.apellido}}</td>
-        <td>{{consult.modalidad.modalidad}}</td>
-        <td>{{consult.violencias}}</td>
-        <td>{{consult.descripcion}}</td>
-        <td *ngIf="consult.estadoConsulta.id == 1" style="color: #979797">{{consult.estadoConsulta.estadoConsulta}}</td>
-        <td *ngIf="consult.estadoConsulta.id == 2" style="color: #FF0000">{{consult.estadoConsulta.estadoConsulta}}</td>
-        <td *ngIf="consult.estadoConsulta.id == 3" style="color: black">{{consult.estadoConsulta.estadoConsulta}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+</section>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="row">
-            <p class="modal-title text-center" style="text-size-adjust: 100px" id="exampleModalLabel">
-              <i class="bi bi-exclamation-circle" style="font-size: 70px; color: #FF9A62"></i>
-            </p>
-            <b class="text-center">¿Estás seguro de que deseas eliminar al usuario?</b>
-            <p class="text-center">La acción no será reversible, y se perderá su historial en el sistema.</p>
+<section *ngIf="consultCount>0">
+  <div class="container-fluid" style="background-color: white">
+    <div class="row py-4">
+      <div class="d-flex">
+        <span class="px-4" style="color: black"><b>Consultas</b> ({{consultCount}})</span>
+        <div class="input-group ms-auto me-3" style="width: 329px;">
+          <input [(ngModel)]="searchText" type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar" aria-describedby="button-addon2">
+          <button class="btn" type="button" id="button-addon2" style="background-color: #0B3C5D; color: white;"><i class="bi-search"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive px-4">
+      <table class="table table-hover" style="background-color: white">
+        <thead>
+        <tr>
+          <th scope="col">Año</th>
+          <th scope="col">Mes</th>
+          <th scope="col">Día</th>
+          <th scope="col">Nombre y Apellido</th>
+          <th scope="col">Modalidad</th>
+          <th scope="col">Violencia</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let consult of consults | customerEmailFilter:searchText">
+          <td>{{consult.fechaReserva.substring(0,4)}}
+            <i (click)="navigateToEditConsult(consult)" class="bi bi-pencil-fill ms-1 me-1 mt-1"></i>
+            <i (click)="storeId(consult.id)" data-toggle="modal" data-target="#exampleModal" class="bi bi-trash-fill mt-1"></i>
+          </td>
+          <td>{{this.monthNames[+consult.fechaReserva.substring(5,7) - 1]}}</td>
+          <td>{{consult.fechaReserva.substring(8,10)}}</td>
+          <td>{{consult.paciente.nombre + " " + consult.paciente.apellido}}</td>
+          <td>{{consult.modalidad.modalidad}}</td>
+          <td>{{consult.violencias}}</td>
+          <td>{{consult.descripcion}}</td>
+          <td *ngIf="consult.estadoConsulta.id == 1" style="color: #979797">{{consult.estadoConsulta.estadoConsulta}}</td>
+          <td *ngIf="consult.estadoConsulta.id == 2" style="color: #FF0000">{{consult.estadoConsulta.estadoConsulta}}</td>
+          <td *ngIf="consult.estadoConsulta.id == 3" style="color: black">{{consult.estadoConsulta.estadoConsulta}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="row">
+              <p class="modal-title text-center" style="text-size-adjust: 100px" id="exampleModalLabel">
+                <i class="bi bi-exclamation-circle" style="font-size: 70px; color: #FF9A62"></i>
+              </p>
+              <b class="text-center">¿Estás seguro de que deseas eliminar al usuario?</b>
+              <p class="text-center">La acción no será reversible, y se perderá su historial en el sistema.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" style="background-color: white; color: black" data-dismiss="modal">Cancelar</button>
+            <button (click)="delete(consultId)" type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" style="background-color: white; color: black" data-dismiss="modal">Cancelar</button>
-          <button (click)="delete(consultId)" type="button" class="btn btn-primary" style="background-color: #EA6369">Eliminar</button>
-        </div>
       </div>
     </div>
+
+
   </div>
-
-
-</div>
+</section>

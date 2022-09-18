@@ -16,12 +16,15 @@ import { NewUserComponent } from './pages/new-user/new-user.component';
 import { CreateConsultComponent } from './pages/create-consult/create-consult.component';
 import { ListConsultComponent } from './pages/list-consult/list-consult.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {SearchPipe} from "./components/search.pipe";
 import { EditConsultComponent } from './pages/edit-consult/edit-consult.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { UserSearchPipe } from './components/user-search.pipe';
 import { PatientSearchPipe } from './components/patient-search.pipe';
+import {NgxSpinnerModule} from "ngx-spinner";
+import {InterceptorService} from "./services/interceptor.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -52,12 +55,18 @@ import { PatientSearchPipe } from './components/patient-search.pipe';
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
 })
-export class AppModule { }
+export class AppModule {
+
+}

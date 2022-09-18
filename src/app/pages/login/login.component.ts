@@ -28,6 +28,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  navigateToRecover() {
+    localStorage.setItem('recover', "recovered");
+    this.route.navigate(['/recover'])
+  }
+
   validateLogin() {
     const formValue = this.form.value;
     this._usersService.login(formValue.email, formValue.password)

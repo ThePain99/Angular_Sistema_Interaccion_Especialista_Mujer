@@ -1,13 +1,13 @@
-<section *ngIf="consultExist == false" class="vh-100" style="background-color: #EDE9E9">
+<section *ngIf="consultExist==false && spinnerBoolean == true" class="vh-100" style="background-color: #EDE9E9">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
 
       <div class="col-8 col-md-6 col-lg-5 col-xl-4 text-center">
-        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 192.45px;"/>
+        <img src="assets/images/empty_state.png" class="rounded-circle" style="width: 192.45px;"/>
         <div style="height: 40px"></div>
         <div>
           <span class="fw-semibold" style="font-size: 15px">Aún no cuentas con usuarios</span>
-          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle ms-2" style="width: 30px;"/>
+          <img src="assets/images/user_icon.png" class="rounded-circle ms-2" style="width: 30px;"/>
         </div>
         <div class="mt-2">
           <span class="fw-normal" style="font-size: 15px">Crea </span>
@@ -17,14 +17,20 @@
           <span class="fw-normal" style="font-size: 15px">y carga su información para darles seguimiento.</span>
         </div>
 
-        <button class="mt-2 btn btn-primary text-white" style="background-color: #0B3C5D; font-size: 14px" type="submit">
+        <button (click)="navigateToCreateConsult()" class="mt-2 btn btn-primary text-white" style="background-color: #0B3C5D; font-size: 14px" type="submit">
           + Crear Usuario</button>
       </div>
     </div>
   </div>
 </section>
 
-<section *ngIf="consultExist == true" class="vh-100" style="background-color: #EDE9E9">
+<div *ngIf="spinnerBoolean == false" class="vh-100">
+  <div class="loading loading--full-height"></div>
+</div>
+
+
+<section *ngIf="consultExist==true && spinnerBoolean == true" style="background-color: #EDE9E9; width: 100%; height: 100vmin;">
+  <ngx-spinner></ngx-spinner>
   <div style="height: 16px;"></div>
   <div class="d-flex">
     <span class="fw-semibold" style="font-size: 14px; margin-left: 41px">Consultas </span>
@@ -45,7 +51,9 @@
     <div class="justify-content-center align-items-center h-100" *ngFor="let consult of consultGroup.games | customerEmailFilter: searchText">
       <div *ngIf="consult.estadoConsulta.id == 3" class="card" style="margin-bottom: 13px">
         <div class="d-flex">
-          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" style="width: 303.84px; height: 192px;"/>
+          <img *ngIf="consult.modalidad.id == 1" src="assets/images/terapia_online.png" style="width: 303.84px; height: 192px;"/>
+          <img *ngIf="consult.modalidad.id == 2" src="assets/images/terapia_presencial.png" style="width: 303.84px; height: 192px;"/>
+          <img *ngIf="consult.modalidad.id == 3" src="assets/images/terapia_presencial.png" style="width: 303.84px; height: 192px;"/>
           <div class="card-body">
             <div>
               <span class="badge rounded-pill fw-semibold" style="margin-right:12px; font-size: 16px; background-color: #1D2731">{{consult.modalidad.modalidad}}</span>

@@ -89,7 +89,7 @@ export class CreateConsultComponent implements OnInit {
       fechaReserva: date.toISOString(),
       descripcion: this.form.value.description,
       usuarioId: this.user.id,
-      estadoConsultaId: 1,
+      estadoConsultaId: 3,
       pacienteId: this.form.value.patient,
       violencias: this.violentButtonList,
       modalidadId: Number(this.form.value.modality),
@@ -101,6 +101,9 @@ export class CreateConsultComponent implements OnInit {
         })
       this.form.reset()
       this.route.navigate(['consults'])
+        .then(() => {
+          window.location.reload();
+        });
     }
 
   }

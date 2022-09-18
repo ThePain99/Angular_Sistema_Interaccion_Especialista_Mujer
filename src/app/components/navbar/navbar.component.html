@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #0B3C5D">
   <div class="container-fluid">
-    <a class="btn navbar-brand text-white" routerLink="">LOGO</a>
+    <a class="btn navbar-brand text-white" (click)="navigateToConsults()">LOGO</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
 
       </ul>
       <div class="dropdown ms-auto">
-        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 35px;"
+        <img src="assets/images/user_icon.png" class="rounded-circle" style="width: 35px;"
              alt="Avatar" />
         <a class="btn text-white dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{this.user.nombre}} {{this.user.apellido}}

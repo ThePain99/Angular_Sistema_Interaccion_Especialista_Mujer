@@ -17,7 +17,7 @@ export class ConsultsService {
   }
 
 
-  private apiURL = `http://localhost:8080/interaction/consulta`;
+  private apiURL = `https://interaction-specialist.uc.r.appspot.com/interaction/consulta`;
   constructor(private http: HttpClient) { }
 
   handleError(error: HttpErrorResponse)
@@ -52,7 +52,6 @@ export class ConsultsService {
   delete(id : number):Observable<any> {
     return this.http.delete(`${this.apiURL}/${id}`, this.httpOptions)
       .pipe(
-        retry(2),
         catchError(this.handleError));
   }
 
