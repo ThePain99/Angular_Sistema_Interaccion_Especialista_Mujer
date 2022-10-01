@@ -62,5 +62,12 @@ export class ConsultsService {
         catchError(this.handleError));
   }
 
+  getConsultsByPatientId(patientId : number):Observable<any> {
+    return this.http.get(`${this.apiURL}?pacienteId=${patientId}`, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
+  }
+
 
 }

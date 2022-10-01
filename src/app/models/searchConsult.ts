@@ -1,14 +1,20 @@
 import {Patients} from "./patients";
+import {Modality} from "./modality";
+import {StateConsult} from "./stateConsult";
 
 export interface SearchConsult {
   id: number;
   fechaReserva: string;
   descripcion: string;
   usuarioId: number;
-  estadoConsultaId: number;
+  estadoConsulta: {
+    [key: string]: StateConsult
+  };
   paciente: {
     [key: string]: Patients
   };
   violencias: Array<string>;
-  modalidadId: number;
+  modalidad: {
+    [key: string]: Modality
+  };
 }

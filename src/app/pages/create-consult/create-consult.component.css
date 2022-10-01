@@ -25,3 +25,21 @@
   color:#fff;
 }
 
+select:invalid{
+  color: gray;
+}
+option{
+  color: black;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: grey;
+  opacity: 1; /* Firefox */
+}
+
+#timepicker:before {
+  content:'Time:';
+  margin-right:.6em;
+  color:#9d9d9d;
+}
+

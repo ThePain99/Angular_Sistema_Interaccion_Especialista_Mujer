@@ -13,8 +13,15 @@ export class NavbarComponent implements OnInit {
 
   constructor(public app: AppComponent,
               private router: Router) {
-    let data: any = localStorage.getItem("userData")
-    this.user = JSON.parse(data)
+
+    if(localStorage.getItem("userData") != null) {
+      let data: any = localStorage.getItem("userData")
+      this.user = JSON.parse(data)
+    } else if (localStorage.getItem("adminData") != null) {
+      let admin: any = localStorage.getItem("adminData")
+      this.user = JSON.parse(admin)
+    }
+
   }
 
   ngOnInit(): void { }
@@ -42,5 +49,6 @@ export class NavbarComponent implements OnInit {
   logOut(): void {
     this.router.navigate([`/login`]).then(() => null);
     localStorage.removeItem("userData")
+    localStorage.removeItem("adminData")
   }
  }

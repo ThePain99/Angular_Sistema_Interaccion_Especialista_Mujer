@@ -27,7 +27,7 @@
         </div>
         <div class="col-xl-3 col-md-3 col-sm-5 col-5">
           <div class="input-group">
-            <input class="form-control" type="search" placeholder="Buscar...">
+            <input [(ngModel)]="searchText" class="form-control" type="search" placeholder="Buscar...">
             <button class="btn" style="background-color: #0B3C5D; color: white" type="submit"><i class="bi-search"></i></button>
           </div>
         </div>
@@ -39,8 +39,11 @@
           </div>
         </div>
       </div>
-      <div class="table-responsive px-4">
-        <table id="table" class="table" style="background-color: white">
+      <div class="table-responsive px-4 text-center">
+        <div *ngIf="(allPatients | patientNameFilter:searchText).length === 0" >
+          No hay datos
+        </div>
+        <table id="table" *ngIf="(allPatients | patientNameFilter:searchText).length > 0" class="table text-start" style="background-color: white">
           <thead>
             <tr>
               <th scope="col">Nombre</th>
@@ -54,20 +57,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr id="table-row" *ngFor="let item of allPatients | slice: (page-1) * pageSize : page * pageSize">
-              <td>{{item.nombre}} 
+            <tr id="table-row" *ngFor="let item of allPatients | slice: (page-1) * pageSize : page * pageSize | patientNameFilter: searchText  ">
+              <td>{{item.nombre}}
                 <span role="button" (click)="navigateToEditPatient(item.id)">
-                  <i id="icon" class="bi bi-pencil-fill"></i>
+                  <i id="icon" class="icon bi bi-pencil-fill"></i>
                 </span>
                 <span class="mx-1" role="button" data-toggle="modal" data-target="#deletePatient" (click)="deletePatient(item.id)">
-                  <i id="icon" class="bi bi-trash-fill"></i>
+                  <i id="icon" class="icon bi bi-trash-fill"></i>
                 </span>
               </td>
               <td>{{item.apellido}}</td>
               <td>{{item.correo}}</td>
               <td>{{item.dni}}</td>
               <td>{{item.numero}}</td>
-              <td>{{item.violencias}}</td>
+              <td *ngIf="item.violencias.length > 0">{{item.violencias}}</td>
+              <td *ngIf="item.violencias.length == 0">-</td>
               <td>{{item.consultaCount}}</td>
               <td>
                 <a role="button" style="color: #00E676" href="https://api.whatsapp.com/send?phone=51{{item.numero}}" target="_blank">
@@ -77,7 +81,7 @@
             </tr>
           </tbody>
         </table>
-        <ngb-pagination id="pagination"
+        <ngb-pagination *ngIf="(allPatients | patientNameFilter:searchText).length > 0" id="pagination"
         [(page)]="page"
         [pageSize]="pageSize"
         [collectionSize]="allPatients.length">

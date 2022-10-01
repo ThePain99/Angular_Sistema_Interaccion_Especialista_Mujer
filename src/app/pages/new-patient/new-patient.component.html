@@ -11,7 +11,7 @@
 <div class="container-fluid overflow-auto  justify-content: center" id="background" style="background-color: #EDE9E957">
     <div class="container px-5" id="box" style="background-color: white">
         <p style="color: #4F4F4F" id="subtitle-1"><b>INFORMACIÓN</b></p>
-        <p style="color: #4F4F4F" id="text">Nombre y Apellido<b style="color: #FF0000">*</b></p>
+        <p style="color: #4F4F4F" class="fw-semibold">Nombre y Apellido<b style="color: #FF0000">*</b></p>
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <input type="text" class="form-control" placeholder="Nombres" (change)="changeName($event)" #name required>
@@ -22,31 +22,31 @@
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-4">
-                <p style="color: #4F4F4F" id="text">DNI<b style="color: #FF0000">*</b></p>
+                <p style="color: #4F4F4F" class="fw-semibold">DNI<b style="color: #FF0000">*</b></p>
                 <input type="number" min="0" class="form-control" placeholder="DNI" (change)="changeDni($event)" #dni required>
             </div>
             <div class="col-lg-3 col-md-4">
-                <p style="color: #4F4F4F" id="text">Correo electrónico<b style="color: #FF0000">*</b></p>
+                <p style="color: #4F4F4F" class="fw-semibold">Correo electrónico<b style="color: #FF0000">*</b></p>
                 <input type="text" class="form-control" placeholder="ejemplo@yopmail.com" (change)="changeEmail($event)" #email required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-4">
-                <p style="color: #4F4F4F" id="text">Número telefónico<b style="color: #FF0000">*</b></p>
+                <p style="color: #4F4F4F" class="fw-semibold" id="text">Número telefónico<b style="color: #FF0000">*</b></p>
                 <input type="number" min="0" class="form-control" placeholder="Número telefónico" (change)="changeCellphone($event)" #cellphone requsired>
             </div>
         </div>
-        
+
         <div class="row justify-content-end py-4">
             <div class="col-auto">
                 <button class="btn btn-secondary" style="background-color:white; color:black" type="submit" (click)="navigateToPatientsList()">Cancelar</button>
             </div>
             <div class="col-auto" style="color:white">
-                <button *ngIf="this.name.value.length==0 || this.lastName.value.length==0 || this.dni.value.length!=8 
+                <button *ngIf="this.name.value.length==0 || this.lastName.value.length==0 || this.dni.value.length!=8
                         || this.email.value.length==0 || this.cellphone.value.length!=9" class="btn btn-secondary"
                         style="background-color:#D9D9D9; color:#979797" type="submit">Guardar</button>
 
-                <button *ngIf="this.name.value.length!=0 && this.lastName.value.length!=0 && this.dni.value.length==8 
+                <button *ngIf="this.name.value.length!=0 && this.lastName.value.length!=0 && this.dni.value.length==8
                         && this.email.value.length!=0 && this.cellphone.value.length==9" class="btn btn-secondary"
                         style="background-color:#0B3C5D; color:white" type="submit" (click)="save()">Guardar</button>
             </div>

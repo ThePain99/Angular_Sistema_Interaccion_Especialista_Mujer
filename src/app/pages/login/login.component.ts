@@ -11,13 +11,13 @@ import {UsersService} from "../../services/users.service";
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  success: any
 
   constructor(private fb: FormBuilder, private route: Router, private app: AppComponent, private _usersService: UsersService) {
     this.app.userLoggedIn = false;
-    this.form = this.fb.group({
-      id: 0,
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required],
+    this.form = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
     })
   }
 
@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
     if(localStorage.getItem("userData") != null)
     {
       this.route.navigate(['consults'])
+    } else if(localStorage.getItem("adminData") != null) {
+      this.route.navigate(['users-list'])
     }
   }
 
@@ -34,27 +36,39 @@ export class LoginComponent implements OnInit {
   }
 
   validateLogin() {
+    let credentials = localStorage.getItem('Password');
     const formValue = this.form.value;
+    this.success = credentials;
+    console.log(this.success)
     this._usersService.login(formValue.email, formValue.password)
       .subscribe((res)=>{
-        console.log(res)
-        if(res.length==0)
-        {
-          alert('Email or password are wrong')
-        } else {
-          if (res.status == 'Success') {
-            if (res.data.tipo == false) {
-              this.route.navigate(['users-list'])
-            }
-            else {
-              this.route.navigate(['consults'])
-            }
-            localStorage.setItem('userData', JSON.stringify(res.data));
-            this.app.userLoggedIn = true;
+          console.log(res)
+          if(res.length==0)
+          {
+            this.success = false;
           } else {
-            alert('Email or password are wrong')
+            if (res.status == 'Success') {
+              if (res.data.tipo == false) {
+                this.route.navigate(['users-list'])
+                localStorage.setItem('adminData', JSON.stringify(res.data));
+                this.app.userLoggedIn = true;
+                localStorage.removeItem('Password')
+              }
+              else {
+                this.route.navigate(['consults'])
+                localStorage.setItem('userData', JSON.stringify(res.data));
+                this.app.userLoggedIn = true;
+                localStorage.removeItem('Password')
+              }
+
+            } else {
+              this.success = false;
+            }
           }
-        }
-      })
+        },
+        (error)=>{
+          this.success = "false";
+        })
+
   }
 }

@@ -18,7 +18,8 @@ export class AppComponent {
     this.validate()
   }
   validate() {
-    if(localStorage.getItem("userData") == null && localStorage.getItem("recover") == null)
+    if(localStorage.getItem("userData") == null && localStorage.getItem("recover") == null &&
+      localStorage.getItem("adminData") == null )
     {
       this.route.navigate(['/login'])
     }

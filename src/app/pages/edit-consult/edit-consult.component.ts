@@ -19,6 +19,8 @@ export class EditConsultComponent implements OnInit {
   violentButtonList: any[]
   patientId: any
   consultEdit: any
+  hasDate!: boolean
+  todayDate:Date = new Date();
 
   constructor(private fb: FormBuilder, private route: Router,
               private _patientsService: PatientsService, private _consultsService: ConsultsService) {
@@ -26,7 +28,7 @@ export class EditConsultComponent implements OnInit {
       patient: ['', Validators.required],
       violent: [''],
       modality: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       date: ['', Validators.required],
       time: ['', Validators.required],
     })
@@ -67,6 +69,7 @@ export class EditConsultComponent implements OnInit {
   addViolent(violent: string) {
     if(!this.violentButtonList.includes(violent)) {
       this.violentButtonList.push(violent)
+      console.log(this.violentButtonList)
     }
   }
 
@@ -76,29 +79,50 @@ export class EditConsultComponent implements OnInit {
     });
   }
 
-  editConsult() {
+  async editConsult(){
     let date = new Date(this.form.value.date + "T" + this.form.value.time + ":00Z")
     let data: any = localStorage.getItem("userData")
     this.user = JSON.parse(data)
-    const consult: Consults = {
-      id: this.consultEdit.id,
-      fechaReserva: date.toISOString(),
-      descripcion: this.form.value.description,
-      usuarioId: this.user.id,
-      estadoConsultaId: this.consultEdit.estadoConsulta.id,
-      pacienteId: this.form.value.patient,
-      violencias: this.violentButtonList,
-      modalidadId: Number(this.form.value.modality),
-    }
-    if(!this.form.invalid) {
-      this._consultsService.update(consult)
-        .subscribe((res)=>{
-          console.log(res)
-        })
-      this.form.reset()
-      this.route.navigate(['consults'])
-    }
+    let patients = [] as any
+    console.log(this.form.value.patient)
+    await this._consultsService.getConsultsByPatientId(this.form.value.patient)
+      .subscribe( (res)=> {
+        patients = res.data;
+        console.log(res.data)
+        if(res.data.length > 0) {
+          patients.forEach((consult: { fechaReserva: { toString: () => string; }; }) => {
+            if(consult.fechaReserva.toString().split("T")[0] != this.form.value.date) {
+              this.hasDate = true
+            } else {
+              this.hasDate = false
+            }
+          })
+        } else if (res.data.length == 0){
+          this.hasDate = true;
+        }
 
+        let date = new Date(this.form.value.date + "T" + this.form.value.time + ":00Z")
+        let data: any = localStorage.getItem("userData")
+        this.user = JSON.parse(data)
+        const consult: Consults = {
+          id: this.consultEdit.id,
+          fechaReserva: date.toISOString(),
+          descripcion: this.form.value.description,
+          usuarioId: this.user.id,
+          estadoConsultaId: this.consultEdit.estadoConsulta.id,
+          pacienteId: this.form.value.patient,
+          violencias: this.violentButtonList,
+          modalidadId: Number(this.form.value.modality),
+        }
+        if(this.hasDate) {
+          this._consultsService.update(consult)
+            .subscribe((res)=>{
+              console.log(res)
+              this.form.reset()
+              this.route.navigate(['consults'])
+            })
+        }
+      })
   }
 
   selectPatient(id: string) {

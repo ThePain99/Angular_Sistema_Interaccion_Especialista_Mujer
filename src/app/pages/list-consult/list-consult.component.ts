@@ -58,4 +58,9 @@ export class ListConsultComponent implements OnInit {
     window.location.reload()
   }
 
+  toStringComa(array: any) {
+    return array.join(", ");
+  }
+
+
 }

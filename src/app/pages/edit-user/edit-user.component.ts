@@ -20,11 +20,11 @@ export class EditUserComponent implements OnInit {
   userType!: number
   modalityId!: any
 
-  constructor(public app: AppComponent, 
+  constructor(public app: AppComponent,
               private router: Router,
               private route: ActivatedRoute,
               private userService: UserService) {
-    let data: any = localStorage.getItem("userData")
+    let data: any = localStorage.getItem("adminData")
     this.user = JSON.parse(data)
     this.userId = Number(this.route.snapshot.paramMap.get('userId'))
     this.getUserById()

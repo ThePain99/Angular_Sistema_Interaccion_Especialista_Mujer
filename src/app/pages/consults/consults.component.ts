@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {UsersService} from "../../services/users.service";
 import {ConsultsService} from "../../services/consults.service";
 import {PatientsService} from "../../services/patients.service";
@@ -12,6 +12,8 @@ import {Consults} from "../../models/consults";
   styleUrls: ['./consults.component.css']
 })
 export class ConsultsComponent implements OnInit {
+  public page = 1
+  public pageSize = 10
   consultExist = false;
   user : any
   consultId: any
@@ -22,12 +24,22 @@ export class ConsultsComponent implements OnInit {
   spinnerBoolean: boolean
   localTime!: Date
 
-  constructor(private _consultsService: ConsultsService, private app: AppComponent, private _patientsService: PatientsService, private route: Router) {
+  constructor(private elementRef: ElementRef, private _consultsService: ConsultsService, private app: AppComponent,
+              private _patientsService: PatientsService, private route: Router) {
     this.searchText = ''
     this.spinnerBoolean = false
   }
 
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.ownerDocument
+      .body.style.backgroundColor = '#EDE9E957';
+  }
+
+
   ngOnInit(): void {
+    if(localStorage.getItem("userData") != null) {
+      this.app.userLoggedIn = true
+    }
     this.validateConsults()
     this.localTime = new Date()
     this.spinnerBoolean = false

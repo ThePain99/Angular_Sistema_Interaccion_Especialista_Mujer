@@ -1,7 +1,7 @@
 <div class="container-fluid" style="background-color: white">
   <div class="row py-4">
     <p class="px-5 my-0" style="color: #2694FC">
-      <b>< Listado de consultas</b>
+      <b role="button" (click)="navigateToConsults()">< Listado de consultas</b>
     </p>
     <p class="px-5 my-0" style="color: #4F4F4F">
       <b>Editar consulta</b>
@@ -42,18 +42,20 @@
       <div class="row">
         <div class="col-8">
           <p class="fw-semibold" style="color: #4F4F4F" >Descripción</p>
-          <textarea formControlName="description" type="text"  class="form-control" style="height: 120px;" placeholder="Escribe aquí una descripción" required></textarea>
+          <textarea formControlName="description" type="text"  class="form-control" style="height: 120px;" placeholder="Escribe aquí una descripción"></textarea>
         </div>
       </div>
 
       <div class="row">
         <div class="col-4">
           <p class="fw-semibold" style="color: #4F4F4F" >Fecha<b style="color: #FF0000">*</b></p>
-          <input formControlName="date" class="form-control" type="date">
+          <input [min]="this.todayDate.toISOString().split('T')[0]" formControlName="date" class="form-control"
+                 type="text" placeholder="Seleccionar fecha" onfocus="(this.type='date')">
         </div>
         <div class="col-4">
           <p class="fw-semibold" style="color: #4F4F4F" >Hora<b style="color: #FF0000">*</b></p>
-          <input formControlName="time" placeholder="Seleccionar hora" class="form-control" type="time">
+          <input min="09:00" max="22:00" formControlName="time" class="form-control"type="text" placeholder="Seleccionar hora"
+                 onfocus="(this.type='time')">
         </div>
       </div>
 
@@ -62,7 +64,8 @@
           <button (click)="navigateToConsults()" class="btn btn-outline-dark" type="submit">Cancelar</button>
         </div>
         <div class="col-auto" style="color:white">
-          <button (click)="editConsult()" class="btn btn-outline-dark" type="button">Guardar</button>
+          <button *ngIf="this.form.invalid == true" style="background-color:#D9D9D9; color:#979797" class="btn btn-outline-dark" type="button">Guardar</button>
+          <button *ngIf="this.form.invalid == false" (click)="editConsult()" class="btn btn-outline-dark" type="button">Guardar</button>
         </div>
       </div>
     </form>

@@ -1,7 +1,7 @@
 <div class="container-fluid" style="background-color: white">
   <div class="row py-4">
-    <p class="px-5 my-0" style="color: #2694FC">
-      <b>< Listado de consultas</b>
+    <p  class="px-5 my-0" style="color: #2694FC">
+      <b role="button" (click)="navigateToConsults()">< Listado de consultas</b>
     </p>
     <p class="px-5 my-0" style="color: #4F4F4F">
       <b>Crear consulta</b>
@@ -15,14 +15,14 @@
       <div class="row">
         <div class="col-4">
           <p class="fw-semibold" style="color: #4F4F4F" >Paciente<b style="color: #FF0000">*</b></p>
-          <select #selectPatients (change)="selectPatient(selectPatients.value)" class="form-select" formControlName="patient">
+          <select #selectPatients (change)="selectPatient(selectPatients.value)" required class="form-select" formControlName="patient">
             <option value="" disabled selected>Seleccionar paciente</option>
             <option [ngValue]="patient.id" *ngFor="let patient of patients">{{patient.nombre + " " + patient.apellido}}</option>
           </select>
         </div>
         <div class="col-4">
           <p class="fw-semibold" style="color: #4F4F4F" >Violencia<b style="color: #FF0000">*</b></p>
-          <select formControlName="violent" #selectedList (change)="addViolent(selectedList.value)" class="form-select">
+          <select required formControlName="violent" #selectedList (change)="addViolent(selectedList.value)" class="form-select">
             <option value="" disabled selected>Seleccionar violencia</option>
             <option *ngFor="let violent of violentList" [value]="violent">{{violent}}</option>
           </select>
@@ -31,7 +31,7 @@
         </div>
         <div class="col-4">
           <p class="fw-semibold" style="color: #4F4F4F" >Modalidad<b style="color: #FF0000">*</b></p>
-          <select formControlName="modality" class="form-select">
+          <select required formControlName="modality" class="form-select">
             <option value="" disabled selected>Seleccionar Modalidad</option>
             <option value="1">Presencial</option>
             <option value="2">Virtual</option>
@@ -41,19 +41,21 @@
       </div>
       <div class="row">
         <div class="col-8">
-          <p class="fw-semibold" style="color: #4F4F4F" >Descripción</p>
-          <textarea formControlName="description" type="text"  class="form-control" style="height: 120px;" placeholder="Escribe aquí una descripción" required></textarea>
+          <p class="fw-semibold mt-2" style="color: #4F4F4F" >Descripción</p>
+          <textarea formControlName="description" type="text"  class="form-control" style="height: 120px;" placeholder="Escribe aquí una descripción"></textarea>
         </div>
       </div>
 
       <div class="row">
         <div class="col-4">
           <p class="fw-semibold" style="color: #4F4F4F" >Fecha<b style="color: #FF0000">*</b></p>
-          <input formControlName="date" class="form-control" type="date">
+          <input [min]="this.todayDate.toISOString().split('T')[0]" formControlName="date" class="form-control"
+                 type="text" placeholder="Seleccionar fecha" onfocus="(this.type='date')">
         </div>
         <div class="col-4">
           <p class="fw-semibold" style="color: #4F4F4F" >Hora<b style="color: #FF0000">*</b></p>
-          <input formControlName="time" placeholder="Seleccionar hora" class="form-control" type="time">
+          <input min="09:00" max="22:00" formControlName="time" class="form-control"type="text" placeholder="Seleccionar hora"
+                 onfocus="(this.type='time')">
         </div>
       </div>
 
@@ -62,7 +64,8 @@
           <button (click)="navigateToConsults()" class="btn btn-outline-dark" type="submit">Cancelar</button>
         </div>
         <div class="col-auto" style="color:white">
-          <button (click)="createConsult()" class="btn btn-outline-dark" type="button">Guardar</button>
+          <button *ngIf="this.form.invalid == true" style="background-color:#D9D9D9; color:#979797" class="btn btn-outline-dark" type="button">Guardar</button>
+          <button *ngIf="this.form.invalid == false" (click)="createConsult()" class="btn btn-outline-dark" type="button">Guardar</button>
         </div>
       </div>
     </form>

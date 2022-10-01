@@ -1,3 +1,5 @@
+html { background-color: black; }
+
 .bi {
   display: none;
 }
@@ -17,6 +19,24 @@
 .btn:hover {
   background-color: RoyalBlue;
 }
+
+
+/*.div1 {
+  height:100%;
+  width: 100%;
+  background-color: red;
+
+  display:block;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container {
+  overflow-y: hidden;
+
+}*/
+
+
 
 @media (min-width: 992px) {
   .col-md-3-5 {
@@ -77,4 +97,10 @@
     transform: rotate(1turn);
   }
 }
+
+ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: white;
+  background-color: #0B3C5D;
+}
+
 

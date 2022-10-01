@@ -3,8 +3,8 @@ import {ConsultsService} from "../../services/consults.service";
 import {PatientsService} from "../../services/patients.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Consults} from "../../models/consults";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ConsultsComponent} from "../consults/consults.component";
+import {Router} from "@angular/router";
+import {firstValueFrom, Observable} from "rxjs";
 
 @Component({
   selector: 'app-create-consult',
@@ -13,6 +13,7 @@ import {ConsultsComponent} from "../consults/consults.component";
 })
 export class CreateConsultComponent implements OnInit {
   form: FormGroup;
+  todayDate:Date = new Date();
   user : any
   patients: any
   violentList = ['Física','Psicológica', 'Emocional', 'Económica',
@@ -21,6 +22,7 @@ export class CreateConsultComponent implements OnInit {
   patientId: any
   consultEdit: any
   editable: string
+  hasDate!:boolean
 
   constructor(private fb: FormBuilder, private route: Router,
               private _patientsService: PatientsService, private _consultsService: ConsultsService) {
@@ -28,7 +30,7 @@ export class CreateConsultComponent implements OnInit {
       patient: ['', Validators.required],
       violent: ['', Validators.required],
       modality: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.nullValidator],
       date: ['', Validators.required],
       time: ['', Validators.required],
     })
@@ -37,6 +39,7 @@ export class CreateConsultComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.todayDate.toISOString())
     this.retrievePatients()
     this.retrieveInformation()
   }
@@ -80,31 +83,58 @@ export class CreateConsultComponent implements OnInit {
     });
   }
 
-  createConsult() {
+  async fetchConsultsByPatient(){
     let date = new Date(this.form.value.date + "T" + this.form.value.time + ":00Z")
     let data: any = localStorage.getItem("userData")
     this.user = JSON.parse(data)
-    const consult: Consults = {
-      id: this.form.value.id,
-      fechaReserva: date.toISOString(),
-      descripcion: this.form.value.description,
-      usuarioId: this.user.id,
-      estadoConsultaId: 3,
-      pacienteId: this.form.value.patient,
-      violencias: this.violentButtonList,
-      modalidadId: Number(this.form.value.modality),
-    }
-    if(!this.form.invalid) {
-      this._consultsService.create(consult)
-        .subscribe((res)=>{
-          console.log(res)
-        })
-      this.form.reset()
-      this.route.navigate(['consults'])
-        .then(() => {
-          window.location.reload();
-        });
-    }
+    let patients = [] as any
+    console.log(this.form.value.patient)
+    await this._consultsService.getConsultsByPatientId(this.form.value.patient)
+      .subscribe( (res)=> {
+        patients = res.data;
+        console.log(res.data)
+        if(res.data.length > 0) {
+          patients.forEach((consult: { fechaReserva: { toString: () => string; }; }) => {
+            if(consult.fechaReserva.toString().split("T")[0] != this.form.value.date) {
+              this.hasDate = true
+            } else {
+              this.hasDate = false
+            }
+          })
+        } else if (res.data.length == 0){
+          this.hasDate = true;
+        }
+
+        const consult: Consults = {
+          id: this.form.value.id,
+          fechaReserva: date.toISOString(),
+          descripcion: this.form.value.description,
+          usuarioId: this.user.id,
+          estadoConsultaId: 3,
+          pacienteId: this.form.value.patient,
+          violencias: this.violentButtonList,
+          modalidadId: Number(this.form.value.modality),
+        }
+
+        console.log(this.hasDate)
+        if(this.hasDate) {
+          this._consultsService.create(consult)
+            .subscribe((res)=>{
+              console.log(res)
+              this.form.reset()
+              this.route.navigate(['consults'])
+                .then(() => {
+                  window.location.reload();
+                });
+            })
+        } else {
+          alert('El paciente ya tiene una consulta en este día')
+        }
+      })
+  }
+
+   async createConsult() {
+    await this.fetchConsultsByPatient()
 
   }
 

@@ -10,7 +10,7 @@
 .table-responsive {
     margin-top: 20px;
 }
-#icon {
+.icon {
     visibility: hidden;
 }
 #table-row:hover #icon {

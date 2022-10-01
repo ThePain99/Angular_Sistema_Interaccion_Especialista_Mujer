@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./new-user.component.css']
 })
 export class NewUserComponent implements OnInit {
-  
+
   user!: any
   name!: string
   lastName!: string
@@ -22,7 +22,7 @@ export class NewUserComponent implements OnInit {
   constructor(public app: AppComponent,
               private router: Router,
               private userService: UserService) {
-    let data: any = localStorage.getItem("userData")
+    let data: any = localStorage.getItem("adminData")
     this.user = JSON.parse(data)
     this.userType = -1
     this.modalityId = -1
@@ -37,8 +37,8 @@ export class NewUserComponent implements OnInit {
     }
     this.userService.createUser(
       new User(
-        this.name, 
-        this.lastName, 
+        this.name,
+        this.lastName,
         this.dni,
         this.email,
         'qwerty123',

@@ -17,15 +17,18 @@ export class UsersListComponent implements OnInit {
   deleteId!: number
   search!: any
   searchText!: string
-  
+
   constructor(public app: AppComponent,
               private router: Router,
               private userService: UserService) {
-    let data: any = localStorage.getItem("userData")
+    let data: any = localStorage.getItem("adminData")
     this.user = JSON.parse(data)
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem("adminData") != null) {
+      this.app.userLoggedIn = true
+    }
     this.getAllUsers()
   }
 

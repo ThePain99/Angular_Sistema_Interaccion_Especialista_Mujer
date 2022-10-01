@@ -32,8 +32,11 @@
         </div>
       </div>
     </div>
-    <div class="table-responsive px-4">
-      <table class="table table-hover" style="background-color: white">
+    <div class="table-responsive px-4  text-center">
+      <div *ngIf="(consults | customerEmailFilter:searchText).length === 0" >
+        No hay datos
+      </div>
+      <table *ngIf="(consults | customerEmailFilter:searchText).length > 0" class="table table-hover text-start" style="background-color: white ">
         <thead>
         <tr>
           <th scope="col">Año</th>
@@ -47,6 +50,7 @@
         </tr>
         </thead>
         <tbody>
+
         <tr *ngFor="let consult of consults | customerEmailFilter:searchText">
           <td>{{consult.fechaReserva.substring(0,4)}}
             <i (click)="navigateToEditConsult(consult)" class="bi bi-pencil-fill ms-1 me-1 mt-1"></i>
@@ -56,11 +60,13 @@
           <td>{{consult.fechaReserva.substring(8,10)}}</td>
           <td>{{consult.paciente.nombre + " " + consult.paciente.apellido}}</td>
           <td>{{consult.modalidad.modalidad}}</td>
-          <td>{{consult.violencias}}</td>
-          <td>{{consult.descripcion}}</td>
+          <td>{{toStringComa(consult.violencias)}}</td>
+          <td *ngIf="consult.descripcion.length > 0">{{consult.descripcion}}</td>
+          <td *ngIf="consult.descripcion.length == 0">-</td>
           <td *ngIf="consult.estadoConsulta.id == 1" style="color: #979797">{{consult.estadoConsulta.estadoConsulta}}</td>
           <td *ngIf="consult.estadoConsulta.id == 2" style="color: #FF0000">{{consult.estadoConsulta.estadoConsulta}}</td>
           <td *ngIf="consult.estadoConsulta.id == 3" style="color: black">{{consult.estadoConsulta.estadoConsulta}}</td>
+
         </tr>
         </tbody>
       </table>
@@ -74,7 +80,7 @@
               <p class="modal-title text-center" style="text-size-adjust: 100px" id="exampleModalLabel">
                 <i class="bi bi-exclamation-circle" style="font-size: 70px; color: #FF9A62"></i>
               </p>
-              <b class="text-center">¿Estás seguro de que deseas eliminar al usuario?</b>
+              <b class="text-center">¿Estás seguro de que deseas eliminar la consulta?</b>
               <p class="text-center">La acción no será reversible, y se perderá su historial en el sistema.</p>
             </div>
           </div>

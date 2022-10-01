@@ -40,8 +40,11 @@
         </div>
       </div>
     </div>
-    <div class="table-responsive px-4">
-      <table id="table" class="table" style="background-color: white">
+    <div class="table-responsive px-4 text-center">
+      <div *ngIf="(allUsers | userNameFilter:searchText).length === 0" >
+        No hay datos
+      </div>
+      <table id="table" *ngIf="(allUsers | userNameFilter:searchText).length > 0" class="table text-start" style="background-color: white">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -76,7 +79,7 @@
           </tr>
         </tbody>
       </table>
-      <ngb-pagination id="pagination"
+      <ngb-pagination *ngIf="(allUsers | userNameFilter:searchText).length > 0" id="pagination"
         [(page)]="page"
         [pageSize]="pageSize"
         [collectionSize]="allUsers.length">

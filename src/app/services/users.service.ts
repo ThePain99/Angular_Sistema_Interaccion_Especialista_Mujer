@@ -24,13 +24,11 @@ export class UsersService {
     if (error.error instanceof ErrorEvent) {
       //Default error handling
       console.log(`An error occurred: ${error.error.message}`);
-      alert('Email or password are wrong')
     } else {
       //Unsuccessful Response Error Code returned from Backend
       console.error(
         `Backend returned code ${error.status}, body was: ${error.error}`
       );
-      alert('Email or password are wrong')
     }
     // Return Observable with Error Message to Client
     return throwError('Something happened with request, please try again later');
