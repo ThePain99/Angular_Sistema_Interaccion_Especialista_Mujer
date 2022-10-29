@@ -16,7 +16,7 @@ export class UsersService {
   }
 
 
-  private apiURL = `https://interaction-specialist.uc.r.appspot.com/interaction/usuario`;
+  private apiURL = `http://systeminteraction-env.eba-t2my3i7r.us-east-1.elasticbeanstalk.com/interaction/usuario`;
   constructor(private http: HttpClient) { }
 
   handleError(error: HttpErrorResponse)

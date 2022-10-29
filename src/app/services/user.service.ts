@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  basePath = 'https://interaction-specialist.uc.r.appspot.com/interaction/usuario'
+  basePath = 'http://systeminteraction-env.eba-t2my3i7r.us-east-1.elasticbeanstalk.com/interaction/usuario'
 
   constructor(private http:HttpClient) { }
 
